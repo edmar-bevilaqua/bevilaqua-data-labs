@@ -12,7 +12,7 @@ const HeroSection = () => {
       <div className="z-10 animate-fade-in">
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">
           <span className="block">Hi, I'm</span>
-          <span className="block gradient-text text-5xl md:text-7xl lg:text-8xl mt-2">John Doe</span>
+          <span className="block gradient-text text-5xl md:text-7xl lg:text-8xl mt-2">Edmar Bevilaqua</span>
         </h1>
         <p className="text-xl md:text-2xl text-foreground/80 max-w-2xl mb-8">
           Data Scientist & Machine Learning Engineer creating impactful solutions through data-driven insights

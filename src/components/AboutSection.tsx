@@ -17,7 +17,16 @@ const AboutSection = () => {
               My background combines strong technical skills with business acumen, allowing me to bridge the gap between data and real-world applications. I'm constantly exploring new technologies and methodologies to stay at the forefront of data science.
             </p>
             <div className="flex flex-wrap gap-4 mt-8">
-              <Button className="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 border-none">
+              <Button 
+                onClick={() => {
+                  window.open(
+                    "https://1drv.ms/b/c/d7fcaa4aac6b4a57/IQSbIebaUf6MRLrgkyrLsOHBAfBWwmOGSSenxAOVLOm_V-o",
+                    "_blank",
+                    "noopener,noreferrer"
+                  );
+                }}
+                className="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 border-none"
+              >
                 <FileText className="mr-2 h-4 w-4" /> Download CV
               </Button>
             </div>

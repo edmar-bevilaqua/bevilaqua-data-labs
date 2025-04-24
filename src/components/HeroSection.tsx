@@ -15,7 +15,7 @@ const HeroSection = () => {
           <span className="block gradient-text text-5xl md:text-7xl lg:text-8xl mt-2">Edmar Bevilaqua</span>
         </h1>
         <p className="text-xl md:text-2xl text-foreground/80 max-w-2xl mb-8">
-          Data Scientist & Machine Learning Engineer creating impactful solutions through data-driven insights
+          Data Scientist & Machine Learning Engineer, creating impactful solutions through data-driven insights
         </p>
         <div className="flex flex-col sm:flex-row gap-4">
           <Button asChild className="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 border-none text-white font-medium px-6 py-2">

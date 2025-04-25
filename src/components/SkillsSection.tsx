@@ -18,25 +18,25 @@ const skillCategories: SkillCategory[] = [
     name: "Programming Languages",
     skills: [
       { name: "Python", level: 95 },
-      { name: "R", level: 85 },
-      { name: "SQL", level: 90 },
-      { name: "JavaScript", level: 75 },
+      { name: "SQL", level: 95 },
+      { name: "JavaScript", level: 80 },
+      { name: "Java", level: 75 },
     ]
   },
   {
     name: "Machine Learning",
     skills: [
-      { name: "Scikit-Learn", level: 90 },
+      { name: "Scikit-Learn", level: 95 },
       { name: "TensorFlow", level: 85 },
       { name: "PyTorch", level: 80 },
-      { name: "XGBoost", level: 85 },
+      { name: "Keras", level: 85 },
     ]
   },
   {
     name: "Data Processing",
     skills: [
       { name: "Pandas", level: 95 },
-      { name: "NumPy", level: 90 },
+      { name: "NumPy", level: 95 },
       { name: "PySpark", level: 80 },
       { name: "Dask", level: 75 },
     ]
@@ -45,7 +45,7 @@ const skillCategories: SkillCategory[] = [
     name: "Visualization",
     skills: [
       { name: "Matplotlib", level: 90 },
-      { name: "Seaborn", level: 85 },
+      { name: "Seaborn", level: 90 },
       { name: "Plotly", level: 80 },
       { name: "D3.js", level: 70 },
     ]
@@ -53,8 +53,8 @@ const skillCategories: SkillCategory[] = [
 ];
 
 const tools = [
-  "Jupyter", "VS Code", "Git", "Docker", "AWS", "GCP", 
-  "Databricks", "Tableau", "Power BI", "Airflow", "Kubernetes"
+  "Python", "Jupyter", "Azure", "Git", "Docker", "AWS", "GCP", 
+  "Databricks", "Power BI", "Tableau", "Airflow", "Kubernetes"
 ];
 
 const SkillsSection = () => {
@@ -91,7 +91,7 @@ const SkillsSection = () => {
             {tools.map((tool, index) => (
               <Badge 
                 key={index} 
-                className="bg-gradient-to-r from-blue-600/20 to-indigo-700/20 hover:from-blue-600/30 hover:to-indigo-700/30 text-white border border-white/10 px-4 py-2"
+                className="bg-gradient-to-r from-blue-600/90 to-indigo-600/90 text-white/90 border border-white/10 px-4 py-2 hover:brightness-125 transition-all"
               >
                 {tool}
               </Badge>

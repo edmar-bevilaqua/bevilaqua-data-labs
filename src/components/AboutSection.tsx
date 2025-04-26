@@ -34,22 +34,82 @@ const AboutSection = () => {
           <div className="md:col-span-2 glass-card p-6 rounded-lg">
             <h3 className="text-xl font-semibold mb-4">Education</h3>
             <div className="mb-4">
-              <p className="font-medium">MSc in Data Science</p>
-              <p className="text-foreground/70">Stanford University, 2018-2020</p>
+              <p className="font-medium">MSc in Computer Science</p>
+              <p className="text-foreground/70">Federal University of Rio Grande do Sul, 2025-Present</p>
             </div>
             <div className="mb-4">
-              <p className="font-medium">BSc in Computer Science</p>
-              <p className="text-foreground/70">MIT, 2014-2018</p>
+              <p className="font-medium">MBA in Data Science & AI</p>
+              <p className="text-foreground/70">PUC-RS, 2023-2025</p>
+            </div>
+            <div className="mb-4">
+              <p className="font-medium">Associate Degree in Systems Analysis and Development</p>
+              <p className="text-foreground/70">UNINTER, 2022-Present</p>
+            </div>
+            <div className="mb-4">
+              <p className="font-medium">BSc in Forestry Engineer</p>
+              <p className="text-foreground/70">Federal University of Santa Maria, 2018-2023</p>
             </div>
             
             <h3 className="text-xl font-semibold mb-4 mt-6">Experience</h3>
             <div className="mb-4">
-              <p className="font-medium">Senior Data Scientist</p>
-              <p className="text-foreground/70">Tech Company, 2020-Present</p>
+              <p className="font-medium">Machine Learning Engineer</p>
+              <p className="text-foreground/70">
+                <a 
+                  href="https://www.linkedin.com/company/aprix/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  Aprix, 2025-Present
+                </a>
+              </p>
             </div>
             <div className="mb-4">
               <p className="font-medium">Data Analyst</p>
-              <p className="text-foreground/70">Analytics Firm, 2018-2020</p>
+              <p className="text-foreground/70">
+                <a 
+                  href="https://www.linkedin.com/company/lojas-quero-quero-s-a/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  Lojas Quero-Quero S.A., 2024-2025
+                </a>
+              </p>
+            </div>
+            <div className="mb-4">
+              <p className="font-medium">Data Science Intern</p>
+              <p className="text-foreground/70">
+                <a 
+                  href="https://www.linkedin.com/company/cmpc-brasil/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  CMPC, 2023-2024
+                </a>
+              </p>
+            </div>
+            <div className="mb-4">
+              <p className="font-medium">Remote Sensing Laboratory Technician</p>
+              <p className="text-foreground/70">
+                <a 
+                  href="https://www.ufsm.br/laboratorios/labsere" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  LABSERE - UFSM, 2022-2023
+                </a>
+              </p>
+            </div>
+            <div className="mb-4">
+              <p className="font-medium">Forest Engineering Assistant</p>
+              <p className="text-foreground/70">
+                <a 
+                  href="https://www.linkedin.com/company/rs-florestal/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  RS Florestal, 2021-2022
+                </a>
+              </p>
             </div>
           </div>
         </div>

@@ -53,15 +53,63 @@ const AboutSection = () => {
             <h3 className="text-xl font-semibold mb-4 mt-6">Experience</h3>
             <div className="mb-4">
               <p className="font-medium">Machine Learning Engineer</p>
-              <p className="text-foreground/70">Aprix, 2025-Present</p>
+              <p className="text-foreground/70">
+                <a 
+                  href="https://www.linkedin.com/company/aprix/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  Aprix, 2025-Present
+                </a>
+              </p>
             </div>
             <div className="mb-4">
               <p className="font-medium">Data Analyst</p>
-              <p className="text-foreground/70">Lojas Quero Quero S.A., 2024-2025</p>
+              <p className="text-foreground/70">
+                <a 
+                  href="https://www.linkedin.com/company/lojas-quero-quero-s-a/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  Lojas Quero-Quero S.A., 2024-2025
+                </a>
+              </p>
             </div>
             <div className="mb-4">
               <p className="font-medium">Data Science Intern</p>
-              <p className="text-foreground/70">CMPC, 2023-2024</p>
+              <p className="text-foreground/70">
+                <a 
+                  href="https://www.linkedin.com/company/cmpc-brasil/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  CMPC, 2023-2024
+                </a>
+              </p>
+            </div>
+            <div className="mb-4">
+              <p className="font-medium">Remote Sensing Laboratory Technician</p>
+              <p className="text-foreground/70">
+                <a 
+                  href="https://www.ufsm.br/laboratorios/labsere" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  LABSERE - UFSM, 2022-2023
+                </a>
+              </p>
+            </div>
+            <div className="mb-4">
+              <p className="font-medium">Forest Engineering Assistant</p>
+              <p className="text-foreground/70">
+                <a 
+                  href="https://www.linkedin.com/company/rs-florestal/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  RS Florestal, 2021-2022
+                </a>
+              </p>
             </div>
           </div>
         </div>

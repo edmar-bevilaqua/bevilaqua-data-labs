@@ -11,10 +11,20 @@ const AboutSection = () => {
         <div className="grid md:grid-cols-5 gap-8 items-center">
           <div className="md:col-span-3">
             <p className="text-lg text-foreground/80 mb-6">
-              I'm a Data Scientist with expertise in machine learning, statistical analysis, and data visualization. With 5+ years of experience working with complex datasets, I've developed a passion for turning data into actionable insights.
+              Data scientist and machine learning engineer with more than 4 years of experience in industry, retail, services and startups. My career combines business intelligence, data engineering and machine learning techniques.
             </p>
             <p className="text-lg text-foreground/80 mb-6">
-              My background combines strong technical skills with business acumen, allowing me to bridge the gap between data and real-world applications. I'm constantly exploring new technologies and methodologies to stay at the forefront of data science.
+              With an academic background in areas ranging from nature to technology, I combine different views in an attempt to solve complex problems.
+            </p>
+            <p className="text-lg text-foreground/80 mb-6">
+              Curious by nature and trying to stay at the forefront of the ever-evolving field of data science, I continually explore new tools, models and methodologies.
+            </p>
+            <p className="text-lg text-foreground/80 mb-6">
+              A bit about what I've developed in the professional field: I've contributed to data-driven projects, from validating the effectiveness of promotional campaigns to designing predictive models that support strategic decision-making.
+              I collaborate to translate raw data and analytical findings into practical and viable actions, that may improve performance, efficiency, and/or profitability.
+            </p>
+            <p className="text-lg text-foreground/80 mb-6">
+              My experience also includes building scalable pipelines, from automating reporting workflows to structuring datasets for advanced analytics.
             </p>
             <div className="flex flex-wrap gap-4 mt-8">
               <Button 

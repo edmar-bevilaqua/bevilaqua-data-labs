@@ -4,36 +4,36 @@ import ProjectCard from './ProjectCard';
 
 const projects = [
   {
-    title: "Predictive Customer Analytics",
-    description: "Built a machine learning model to predict customer churn with 92% accuracy, helping increase retention by 15%.",
-    tags: ["Python", "Scikit-Learn", "Pandas"],
-    imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    demoLink: "#",
-    githubLink: "#",
+    title: "Data Science Studies",
+    description: "Most of my projects are in this repository. It includes various data science projects, including data cleaning, data analysis, data visualization, deep learning, transfer learning, etc.",
+    tags: ["Python", "Scikit-Learn", "Pandas", "Numpy", "Matplotlib"],
+    imageUrl: "public/images/data_science_image.avif",
+    //demoLink: "#",
+    githubLink: "https://github.com/edmar-bevilaqua/data_science",
   },
   {
     title: "Time Series Forecasting",
-    description: "Developed an LSTM-based forecasting system for financial market prediction, achieving 85% directional accuracy.",
-    tags: ["TensorFlow", "Time Series", "Deep Learning"],
-    imageUrl: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    demoLink: "#",
-    githubLink: "#",
+    description: "Developed a forecasting system based on Ensemble Learning for sales forecasting at Corporación Favorita. Achieved 0.44 on RMSLE metric (Top 100 on Kaggle Competition).",
+    tags: ["Time Series", "Ensemble Learning", "Nested-CV", "Hyperparameter Tuning"],
+    imageUrl: "public/images/time_series_forecasting.avif",
+    //demoLink: "#",
+    githubLink: "https://github.com/edmar-bevilaqua/store-sales-tsf-kaggle-competition",
   },
   {
-    title: "NLP Sentiment Analysis",
-    description: "Created a sentiment analysis tool for product reviews using BERT, improving product feedback processing by 70%.",
-    tags: ["NLP", "BERT", "PyTorch"],
-    imageUrl: "https://images.unsplash.com/photo-1516110833967-0b5716ca1387?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    demoLink: "#",
-    githubLink: "#",
+    title: "Money Laundering Links Prediction",
+    description: "Implemented a Graph Neural Network (GNN) for the prediction of fraudulent edges in a synthetic financial transaction dataset for Anti-Money Laundering. Achieved +80% F1-score for all fraudulent transaction patterns",
+    tags: ["Deep Learning", "Graph Neural Networks", "PyTorch Geometric"],
+    imageUrl: "public/images/graph_neural_network.avif",
+    //demoLink: "#",
+    githubLink: "https://github.com/edmar-bevilaqua/anti-money-laundering-project",
   },
   {
-    title: "Data Visualization Dashboard",
-    description: "Designed an interactive dashboard for business metrics visualization using D3.js and React, improving decision-making processes.",
-    tags: ["D3.js", "React", "Visualization"],
-    imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    demoLink: "#",
-    githubLink: "#",
+    title: "Personal Portfolio Website",
+    description: "This website you are seeing. I Developed a personal portfolio website using React and Tailwind CSS, showcasing my projects and skills.",
+    tags: ["Typescript", "React", "Tailwind CSS", "JSX"],
+    imageUrl: "public/images/personal_website.avif",
+    //demoLink: "#",
+    githubLink: "https://github.com/edmar-bevilaqua/personal_website",
   },
 ];
 
@@ -50,7 +50,6 @@ const ProjectsSection = () => {
               description={project.description}
               tags={project.tags}
               imageUrl={project.imageUrl}
-              demoLink={project.demoLink}
               githubLink={project.githubLink}
             />
           ))}

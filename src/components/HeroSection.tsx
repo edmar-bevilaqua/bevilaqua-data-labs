@@ -4,6 +4,18 @@ import { ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const HeroSection = () => {
+  const scrollToSection = (sectionId: string) => (e: React.MouseEvent) => {
+      e.preventDefault();
+      const section = document.getElementById(sectionId);
+      
+      if (section) {
+        window.scrollTo({
+          top: section.offsetTop, // Offset to account for fixed navbar
+          behavior: 'smooth'
+        });
+      }
+    };
+
   return (
     <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-hero-gradient opacity-70 z-0"></div>
@@ -18,11 +30,17 @@ const HeroSection = () => {
           Data Scientist & Machine Learning Engineer, creating impactful solutions through data-driven insights
         </p>
         <div className="flex flex-col sm:flex-row gap-4">
-          <Button asChild className="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 border-none text-white font-medium px-6 py-2">
-            <a href="#projects">View My Work</a>
+          <Button
+            className="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 border-none text-white font-medium px-6 py-2"
+            onClick={scrollToSection('projects')}
+          >
+            View My Work
           </Button>
-          <Button variant="outline" className="border-white/20 hover:bg-white/10">
-            <a href="#contact">Get In Touch</a>
+          <Button
+            className="border-white/20 hover:bg-white/10"
+            onClick={scrollToSection('contact')}
+          >
+            Get In Touch
           </Button>
         </div>
       </div>

@@ -1,22 +1,10 @@
-# Welcome to your Lovable project
-
-## Project info
-
-**URL**: https://lovable.dev/projects/5ced3169-a18a-4162-9cf3-2a2e97dace27
+# Welcome to my `Personal Website` repository
 
 ## How can I edit this code?
 
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/5ced3169-a18a-4162-9cf3-2a2e97dace27) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
 **Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+If you want to work locally using your own IDE, you can clone this repo and push changes.
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
@@ -24,13 +12,13 @@ Follow these steps:
 
 ```sh
 # Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+git clone https://github.com/edmar-bevilaqua/personal_website.git
 
 # Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+cd personal_website
 
 # Step 3: Install the necessary dependencies.
-npm i
+npm install
 
 # Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
@@ -62,12 +50,12 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/5ced3169-a18a-4162-9cf3-2a2e97dace27) and click on Share -> Publish.
+I use **Github Pages** because I feel confortable using it, but you can use whatever host you want, just make sure you change the code to fit the platform.
 
-## Can I connect a custom domain to my Lovable project?
+---
 
-Yes it is!
+## Releases
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+- The [first version](https://github.com/edmar-bevilaqua/personal_website/tree/3c3a14e06ea4ce1d5a6d1fb407c3be14f481b319) of this project was built using recomendations from [Lovable](https://lovable.dev/) AI.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+All following customizations and updates were coded by me (mostly because I was learning about **React** and **Typescript**).

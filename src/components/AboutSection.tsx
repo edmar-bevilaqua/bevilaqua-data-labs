@@ -30,7 +30,7 @@ const AboutSection = () => {
               <Button 
                 onClick={() => {
                   window.open(
-                    "https://1drv.ms/b/c/d7fcaa4aac6b4a57/IQSbIebaUf6MRLrgkyrLsOHBAfBWwmOGSSenxAOVLOm_V-o",
+                    "https://drive.google.com/uc?id=1LciOMrvWBoe8BfVjCv0-8QJ3XUXbzgyn&export=download",
                     "_blank",
                     "noopener,noreferrer"
                   );

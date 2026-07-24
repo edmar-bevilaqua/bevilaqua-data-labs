@@ -4,7 +4,7 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: mode === 'production' ? '/personal_website/' : '/',
+  base: mode === 'production' ? '/bevilaqua-data-labs/' : '/',
   server: {
     host: "::",
     port: 8080,

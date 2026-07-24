@@ -7,17 +7,23 @@ import ProjectsSection from '@/components/ProjectsSection';
 import SkillsSection from '@/components/SkillsSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
+import { Language } from '@/content/siteContent';
 
-const Index = () => {
+interface IndexProps {
+  language: Language;
+  setLanguage: (language: Language) => void;
+}
+
+const Index = ({ language, setLanguage }: IndexProps) => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      <Navbar />
-      <HeroSection />
-      <AboutSection />
-      <ProjectsSection />
-      <SkillsSection />
-      <ContactSection />
-      <Footer />
+      <Navbar language={language} setLanguage={setLanguage} />
+      <HeroSection language={language} />
+      <AboutSection language={language} />
+      <SkillsSection language={language} />
+      <ProjectsSection language={language} />
+      <ContactSection language={language} />
+      <Footer language={language} />
     </div>
   );
 };

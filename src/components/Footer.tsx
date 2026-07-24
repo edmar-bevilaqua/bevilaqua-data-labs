@@ -1,7 +1,16 @@
 
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Language, siteContent } from '@/content/siteContent';
 
-const Footer = () => {
+interface FooterProps {
+  language: Language;
+}
+
+const Footer = ({ language }: FooterProps) => {
+  const copy = siteContent[language];
+  const navigate = useNavigate();
+
   const scrollToSection = (sectionId: string) => (e: React.MouseEvent) => {
     e.preventDefault();
     const section = document.getElementById(sectionId);
@@ -11,6 +20,12 @@ const Footer = () => {
         top: section.offsetTop,
         behavior: 'smooth'
       });
+    } else {
+      navigate('/');
+      window.setTimeout(() => {
+        const target = document.getElementById(sectionId);
+        target?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     }
   };
 
@@ -18,35 +33,35 @@ const Footer = () => {
     <footer className="py-8 px-6 md:px-12 lg:px-24 bg-background/90 border-t border-foreground/10">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center">
         <p className="text-foreground/60 text-sm">
-          © {new Date().getFullYear()} Data Science Portfolio. All rights reserved.
+          © {new Date().getFullYear()} {copy.brand}. {copy.footer.rights}
         </p>
         <div className="mt-4 md:mt-0">
-          <ul className="flex space-x-8">
+          <ul className="flex flex-wrap justify-center gap-x-8 gap-y-3">
             <li>
               <a 
                 href="#about" 
                 className="text-foreground/60 text-sm hover:text-foreground transition-colors" 
                 onClick={scrollToSection('about')}
               >
-                About
+                {copy.nav.about}
               </a>
             </li>
             <li>
               <a 
-                href="#projects" 
+                href="#services" 
                 className="text-foreground/60 text-sm hover:text-foreground transition-colors"
-                onClick={scrollToSection('projects')}
+                onClick={scrollToSection('services')}
               >
-                Projects
+                {copy.nav.services}
               </a>
             </li>
             <li>
               <a 
-                href="#skills" 
+                href="#solutions" 
                 className="text-foreground/60 text-sm hover:text-foreground transition-colors"
-                onClick={scrollToSection('skills')}
+                onClick={scrollToSection('solutions')}
               >
-                Skills
+                {copy.nav.solutions}
               </a>
             </li>
             <li>
@@ -55,8 +70,18 @@ const Footer = () => {
                 className="text-foreground/60 text-sm hover:text-foreground transition-colors"
                 onClick={scrollToSection('contact')}              
               >
-                Contact
+                {copy.nav.contact}
               </a>
+            </li>
+            <li>
+              <Link to="/privacy" className="text-foreground/60 text-sm hover:text-foreground transition-colors">
+                {copy.nav.privacy}
+              </Link>
+            </li>
+            <li>
+              <Link to="/support" className="text-foreground/60 text-sm hover:text-foreground transition-colors">
+                {copy.nav.support}
+              </Link>
             </li>
           </ul>
         </div>

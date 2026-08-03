@@ -12,6 +12,7 @@ interface ProjectCardProps {
   imageUrl: string;
   demoLink?: string;
   githubLink?: string;
+  repositoryLabel?: string;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -21,6 +22,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   imageUrl,
   demoLink,
   githubLink,
+  repositoryLabel = 'Repository',
 }) => {
   return (
     <Card className="glass-card overflow-hidden h-full flex flex-col transition-transform duration-300 hover:translate-y-[-5px]">
@@ -50,7 +52,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         {githubLink && (
           <Button variant="outline" size="sm" className="border-white/20 hover:bg-white/10">
             <a href={githubLink} target="_blank" rel="noopener noreferrer" className="flex items-center">
-              <Github className="mr-2 h-4 w-4" /> Code
+              <Github className="mr-2 h-4 w-4" /> {repositoryLabel}
             </a>
           </Button>
         )}

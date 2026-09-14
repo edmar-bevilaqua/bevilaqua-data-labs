@@ -1,5 +1,7 @@
 
 import { Language, siteContent } from '@/content/siteContent';
+import SectionHeading from './SectionHeading';
+import { useInView, revealClass } from '@/hooks/useInView';
 
 interface AboutSectionProps {
   language: Language;
@@ -7,26 +9,31 @@ interface AboutSectionProps {
 
 const AboutSection = ({ language }: AboutSectionProps) => {
   const copy = siteContent[language].about;
+  const { ref, isVisible } = useInView<HTMLDivElement>();
 
   return (
-    <section id="about" className="section-spacing px-6 md:px-12 lg:px-24 relative">
-      <div className="max-w-5xl mx-auto">
-        <h2 className="section-heading">{copy.title}</h2>
-        <div className="grid md:grid-cols-5 gap-8 items-start">
-          <div className="md:col-span-3">
+    <section id="about" className="section-spacing px-6 md:px-12 lg:px-24">
+      <div ref={ref} className={`mx-auto max-w-6xl ${revealClass(isVisible)}`}>
+        <SectionHeading title={copy.title} className="mb-10 md:mb-14" />
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-7">
             {copy.paragraphs.map((paragraph) => (
-              <p key={paragraph} className="text-lg text-foreground/80 mb-6">
+              <p key={paragraph} className="mb-6 max-w-[65ch] text-lg text-foreground/80">
                 {paragraph}
               </p>
             ))}
           </div>
-          <div className="md:col-span-2 grid gap-4">
-            {copy.principles.map((principle) => (
-              <div key={principle.title} className="glass-card p-6 rounded-lg">
-                <h3 className="text-xl font-semibold mb-3">{principle.title}</h3>
-                <p className="text-foreground/70">{principle.description}</p>
-              </div>
-            ))}
+          <div className="md:col-span-5 md:border-l md:border-border md:pl-10">
+            <ul className="divide-y divide-border">
+              {copy.principles.map((principle) => (
+                <li key={principle.title} className="py-5 first:pt-0 last:pb-0">
+                  <h3 className="mb-2 font-display text-lg font-semibold text-foreground">
+                    {principle.title}
+                  </h3>
+                  <p className="text-foreground/70">{principle.description}</p>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>

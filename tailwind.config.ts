@@ -20,6 +20,11 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				sans: ['Montserrat', 'Helvetica', 'system-ui', 'sans-serif'],
+				display: ['Montserrat', 'Helvetica', 'system-ui', 'sans-serif'],
+				mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -106,30 +111,13 @@ export default {
 						opacity: '0',
 						transform: 'translateY(10px)'
 					}
-				},
-				'gradient-shift': {
-					'0%': {
-						backgroundPosition: '0% 50%'
-					},
-					'50%': {
-						backgroundPosition: '100% 50%'
-					},
-					'100%': {
-						backgroundPosition: '0% 50%'
-					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.5s ease-out',
-				'fade-out': 'fade-out 0.5s ease-out',
-				'gradient-shift': 'gradient-shift 15s ease infinite'
-			},
-			backgroundImage: {
-				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-				'hero-gradient': 'linear-gradient(to right, #0f172a, #1e293b)',
-				'card-gradient': 'linear-gradient(219deg, rgba(33,39,55,1) 0%, rgba(15,23,42,1) 100%)',
+				'fade-out': 'fade-out 0.5s ease-out'
 			}
 		}
 	},

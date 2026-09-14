@@ -1,129 +1,205 @@
 
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 import { SiGithub, SiLinkedin, SiGmail } from 'react-icons/si';
-import { Building2 } from 'lucide-react';
 import { Language, siteContent } from '@/content/siteContent';
+import SectionHeading from './SectionHeading';
+import { useInView, revealClass } from '@/hooks/useInView';
 
 interface ContactSectionProps {
   language: Language;
 }
 
 const CONTACT_EMAIL = 'edmar.bevi@gmail.com';
+const EMAILJS_SERVICE_ID = 'service_9w4s4j6';
+const EMAILJS_TEMPLATE_ID = 'template_2f545m9';
+
+type FormStatus = 'idle' | 'sending' | 'success' | 'error';
 
 const ContactSection = ({ language }: ContactSectionProps) => {
   const copy = siteContent[language].contact;
+  const [status, setStatus] = useState<FormStatus>('idle');
+  const formRef = useRef<HTMLFormElement>(null);
+  const { ref, isVisible } = useInView<HTMLDivElement>();
 
   useEffect(() => {
     emailjs.init('l8s4zO3aYgl-d3dOb');
   }, []);
 
-  const formRef = useRef<HTMLFormElement>(null);
+  const schema = useMemo(
+    () =>
+      z.object({
+        name: z.string().trim().min(1, copy.form.nameRequired),
+        email: z.string().trim().email(copy.form.emailInvalid),
+        company: z.string().trim().optional(),
+        message: z.string().trim().min(1, copy.form.messageRequired),
+      }),
+    [copy.form]
+  );
 
-  const sendEmail = (e: React.FormEvent) => {
-    e.preventDefault();
+  const form = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
+    defaultValues: { name: '', email: '', company: '', message: '' },
+  });
 
-    const form = formRef.current;
-    if (form) {
-      const name = (form['name'] as unknown as HTMLInputElement).value.trim();
-      const email = (form['email'] as unknown as HTMLInputElement).value.trim();
-      const message = (form['message'] as unknown as HTMLTextAreaElement).value.trim();
-
-      if (!name || !email || !message) {
-        alert(copy.form.requiredAlert);
-        return;
-      }
-    }
-
-    if (formRef.current) {
-      emailjs
-        .sendForm(
-          'service_9w4s4j6',
-          'template_2f545m9',
-          formRef.current,
-        )
-        .then(
-          (result) => {
-            console.log('Email enviado com sucesso:', result.text);
-            alert(copy.form.successAlert);
-          },
-          (error) => {
-            console.error('Erro ao enviar o email:', error.text);
-            alert(copy.form.errorAlert);
-          }
-        );
+  const onSubmit = async () => {
+    if (!formRef.current) return;
+    setStatus('sending');
+    try {
+      await emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, formRef.current);
+      setStatus('success');
+      form.reset();
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      setStatus('error');
     }
   };
 
   return (
-    <section id="contact" className="section-spacing px-6 md:px-12 lg:px-24 relative bg-card-gradient">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="section-heading">{copy.title}</h2>
-        
-        <div className="grid md:grid-cols-2 gap-12">
-          <div>
-            <p className="text-lg text-foreground/80 mb-8">
-              {copy.intro}
-            </p>
-            
-            <div className="space-y-4 mb-8">
-              <div className="flex items-center">
-                <SiGmail className="w-5 h-5 mr-3 text-foreground/60" />
-                <a href={`mailto:${CONTACT_EMAIL}`} className="text-foreground/80 hover:text-foreground transition-colors">
+    <section id="contact" className="section-spacing px-6 md:px-12 lg:px-24">
+      <div ref={ref} className={`mx-auto max-w-6xl ${revealClass(isVisible)}`}>
+        <SectionHeading title={copy.title} className="mb-14 md:mb-16" />
+
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <p className="mb-8 max-w-[45ch] text-lg text-foreground/80">{copy.intro}</p>
+
+            <div className="mb-8 space-y-4">
+              <div className="flex items-center gap-3">
+                <SiGmail className="h-4 w-4 text-foreground/50" aria-hidden="true" />
+                <a
+                  href={`mailto:${CONTACT_EMAIL}`}
+                  className="text-foreground/80 transition-colors hover:text-foreground"
+                >
                   {CONTACT_EMAIL}
                 </a>
               </div>
-              <div className="flex items-center">
-                <Building2 className="w-5 h-5 mr-3 text-foreground/60" />
-                <span className="text-foreground/80">{copy.availability}</span>
-              </div>
+              <p className="pl-7 text-sm text-foreground/70">{copy.availability}</p>
             </div>
-            
-            <div className="flex space-x-4">
-              <a 
-                href="https://github.com/edmar-bevilaqua" 
-                className="w-10 h-10 rounded-full flex items-center justify-center bg-secondary/50 hover:bg-secondary transition-colors"
-                aria-label="Github"
+
+            <div className="flex gap-3">
+              <a
+                href="https://github.com/edmar-bevilaqua"
+                className="flex h-10 w-10 items-center justify-center rounded-md border border-border text-foreground/70 transition-colors hover:border-foreground hover:bg-accent/10 hover:text-foreground"
+                aria-label="GitHub"
               >
-                <SiGithub className="w-5 h-5" />
+                <SiGithub className="h-4 w-4" />
               </a>
-              <a 
-                href="https://www.linkedin.com/in/edmar-bevilaqua/" 
-                className="w-10 h-10 rounded-full flex items-center justify-center bg-secondary/50 hover:bg-secondary transition-colors"
+              <a
+                href="https://www.linkedin.com/in/edmar-bevilaqua/"
+                className="flex h-10 w-10 items-center justify-center rounded-md border border-border text-foreground/70 transition-colors hover:border-foreground hover:bg-accent/10 hover:text-foreground"
                 aria-label="LinkedIn"
               >
-                <SiLinkedin className="w-5 h-5" />
+                <SiLinkedin className="h-4 w-4" />
               </a>
             </div>
           </div>
-          
-          <div className="glass-card p-6 rounded-lg">
-            <form ref={formRef} onSubmit={sendEmail}>
-              <div className="space-y-4">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-1">{copy.form.name}</label>
-                  <Input id="name" name="name" placeholder={copy.form.namePlaceholder} className="bg-background/50 border-foreground/10" />
+
+          <div className="md:col-span-7">
+            <Form {...form}>
+              <form
+                ref={formRef}
+                onSubmit={form.handleSubmit(onSubmit)}
+                noValidate
+                className="space-y-5"
+              >
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{copy.form.name}</FormLabel>
+                        <FormControl>
+                          <Input placeholder={copy.form.namePlaceholder} {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{copy.form.email}</FormLabel>
+                        <FormControl>
+                          <Input type="email" placeholder={copy.form.emailPlaceholder} {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-1">{copy.form.email}</label>
-                  <Input id="email" name="email" type="email" placeholder={copy.form.emailPlaceholder} className="bg-background/50 border-foreground/10" />
-                </div>
-                <div>
-                  <label htmlFor="company" className="block text-sm font-medium mb-1">{copy.form.company}</label>
-                  <Input id="company" name="company" placeholder={copy.form.companyPlaceholder} className="bg-background/50 border-foreground/10" />
-                </div>
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-1">{copy.form.message}</label>
-                  <Textarea id="message" name="message" placeholder={copy.form.messagePlaceholder} className="bg-background/50 border-foreground/10 min-h-[150px]" />
-                </div>
-                <Button type="submit" className="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 border-none">
-                  {copy.form.submit}
+
+                <FormField
+                  control={form.control}
+                  name="company"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{copy.form.company}</FormLabel>
+                      <FormControl>
+                        <Input placeholder={copy.form.companyPlaceholder} {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{copy.form.message}</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder={copy.form.messagePlaceholder}
+                          className="min-h-[140px]"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <Button
+                  type="submit"
+                  disabled={status === 'sending'}
+                  className="w-full bg-accent text-accent-foreground transition-transform hover:bg-accent/90 active:scale-[0.98] disabled:opacity-60"
+                >
+                  {status === 'sending' ? copy.form.sending : copy.form.submit}
                 </Button>
-              </div>
-            </form>
+
+                <div role="status" aria-live="polite">
+                  {status === 'success' && (
+                    <p className="rounded-md border border-border bg-secondary/40 px-4 py-3 text-sm text-foreground">
+                      {copy.form.successMessage}
+                    </p>
+                  )}
+                  {status === 'error' && (
+                    <p className="rounded-md border border-destructive/30 px-4 py-3 text-sm text-destructive">
+                      {copy.form.errorMessage}
+                    </p>
+                  )}
+                </div>
+              </form>
+            </Form>
           </div>
         </div>
       </div>

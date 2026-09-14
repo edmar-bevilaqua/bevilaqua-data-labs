@@ -1,70 +1,82 @@
 
 import React from 'react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { ExternalLink, Github } from 'lucide-react';
+import { SiGithub } from 'react-icons/si';
 
 interface ProjectCardProps {
   title: string;
-  description: string;
+  problem: string;
+  method: string;
+  relevance: string;
   tags: string[];
   imageUrl: string;
-  demoLink?: string;
   githubLink?: string;
-  repositoryLabel?: string;
+  repositoryLabel: string;
+  labels: { problem: string; method: string; relevance: string };
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
-  description,
+  problem,
+  method,
+  relevance,
   tags,
   imageUrl,
-  demoLink,
   githubLink,
-  repositoryLabel = 'Repository',
+  repositoryLabel,
+  labels,
 }) => {
   return (
-    <Card className="glass-card overflow-hidden h-full flex flex-col transition-transform duration-300 hover:translate-y-[-5px]">
-      <div className="h-48 overflow-hidden">
-        <img
-          src={imageUrl}
-          alt={title}
-          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-        />
+    <article className="flex flex-col">
+      <img
+        src={imageUrl}
+        alt={`Ilustração conceitual do projeto ${title}`}
+        className="mb-5 aspect-[16/10] w-full rounded-md object-cover"
+        loading="lazy"
+      />
+      <div className="mb-3 flex flex-wrap gap-2">
+        {tags.map((tag) => (
+          <span
+            key={tag}
+            className="rounded-sm border border-border px-2 py-0.5 font-mono text-[11px] text-foreground/70"
+          >
+            {tag}
+          </span>
+        ))}
       </div>
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        <div className="flex flex-wrap gap-2 mt-2">
-          {tags.map((tag, index) => (
-            <Badge key={index} variant="secondary" className="bg-accent/50 hover:bg-accent/70">
-              {tag}
-            </Badge>
-          ))}
+      <h3 className="mb-3 font-display text-lg font-semibold text-foreground">{title}</h3>
+      <dl className="space-y-3 text-sm">
+        <div>
+          <dt className="mb-1 font-mono text-[11px] uppercase tracking-wide text-foreground/70">
+            {labels.problem}
+          </dt>
+          <dd className="text-foreground/75">{problem}</dd>
         </div>
-      </CardHeader>
-      <CardContent className="flex-grow">
-        <CardDescription className="text-foreground/70 text-sm">
-          {description}
-        </CardDescription>
-      </CardContent>
-      <CardFooter className="flex gap-2">
-        {githubLink && (
-          <Button variant="outline" size="sm" className="border-white/20 hover:bg-white/10">
-            <a href={githubLink} target="_blank" rel="noopener noreferrer" className="flex items-center">
-              <Github className="mr-2 h-4 w-4" /> {repositoryLabel}
-            </a>
-          </Button>
-        )}
-        {demoLink && (
-          <Button variant="default" size="sm" className="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 border-none">
-            <a href={demoLink} target="_blank" rel="noopener noreferrer" className="flex items-center">
-              <ExternalLink className="mr-2 h-4 w-4" /> Demo
-            </a>
-          </Button>
-        )}
-      </CardFooter>
-    </Card>
+        <div>
+          <dt className="mb-1 font-mono text-[11px] uppercase tracking-wide text-foreground/70">
+            {labels.method}
+          </dt>
+          <dd className="text-foreground/75">{method}</dd>
+        </div>
+        <div>
+          <dt className="mb-1 font-mono text-[11px] uppercase tracking-wide text-foreground/70">
+            {labels.relevance}
+          </dt>
+          <dd className="text-foreground/75">{relevance}</dd>
+        </div>
+      </dl>
+      {githubLink && (
+        <a
+          href={githubLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-5 inline-flex items-center gap-2 font-mono text-xs text-foreground hover:underline"
+        >
+          <SiGithub className="h-3.5 w-3.5" aria-hidden="true" />
+          {repositoryLabel}
+          <span aria-hidden="true">→</span>
+        </a>
+      )}
+    </article>
   );
 };
 

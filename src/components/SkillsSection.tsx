@@ -1,53 +1,54 @@
 
-import { Badge } from '@/components/ui/badge';
-import { BrainCircuit, ChartNoAxesCombined, CloudCog, Database, Workflow } from 'lucide-react';
 import { Language, siteContent } from '@/content/siteContent';
+import SectionHeading from './SectionHeading';
+import { useInView, revealClass } from '@/hooks/useInView';
 
 interface SkillsSectionProps {
   language: Language;
 }
 
 const tools = [
-  "Python", "Jupyter", "Azure", "Git", "Docker", "AWS", "GCP", 
-  "Databricks", "Power BI", "Tableau", "Airflow", "Kubernetes"
+  'Python', 'Jupyter', 'Azure', 'Git', 'Docker', 'AWS', 'GCP',
+  'Databricks', 'Power BI', 'Tableau', 'Airflow', 'Kubernetes'
 ];
-
-const icons = [BrainCircuit, Database, ChartNoAxesCombined, Workflow, CloudCog];
 
 const SkillsSection = ({ language }: SkillsSectionProps) => {
   const copy = siteContent[language].services;
+  const { ref, isVisible } = useInView<HTMLDivElement>();
 
   return (
-    <section id="services" className="section-spacing px-6 md:px-12 lg:px-24 relative">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="section-heading">{copy.title}</h2>
-        <p className="text-lg text-foreground/80 max-w-3xl mb-12">{copy.intro}</p>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {copy.items.map((service, index) => {
-            const Icon = icons[index] || BrainCircuit;
+    <section id="services" className="section-spacing px-6 md:px-12 lg:px-24">
+      <div ref={ref} className={`mx-auto max-w-6xl ${revealClass(isVisible)}`}>
+        <SectionHeading title={copy.title} className="mb-4" />
+        <p className="mb-14 max-w-[65ch] text-lg text-foreground/80 md:mb-16">{copy.intro}</p>
 
-            return (
-              <div key={service.title} className="glass-card p-6 rounded-lg">
-                <Icon className="w-8 h-8 text-blue-300 mb-4" />
-                <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
-                <p className="text-foreground/70">{service.description}</p>
-              </div>
-            );
-          })}
-        </div>
+        <ol className="relative ml-4 border-l border-border">
+          {copy.items.map((service, index) => (
+            <li key={service.title} className="relative pb-10 pl-8 last:pb-0">
+              <span className="absolute left-0 top-0 flex h-8 w-8 -translate-x-1/2 items-center justify-center rounded-full border-2 border-foreground bg-accent font-mono text-xs text-accent-foreground">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <h3 className="mb-2 font-display text-lg font-semibold text-foreground">
+                {service.title}
+              </h3>
+              <p className="max-w-[60ch] text-foreground/70">{service.description}</p>
+            </li>
+          ))}
+        </ol>
 
-        <div className="mt-16">
-          <h3 className="text-2xl font-semibold mb-4">{copy.technologiesTitle}</h3>
-          <p className="text-foreground/70 max-w-3xl mb-6">{copy.technologiesIntro}</p>
-          <div className="flex flex-wrap gap-3">
-            {tools.map((tool, index) => (
-              <Badge 
-                key={index} 
-                className="bg-gradient-to-r from-blue-600/90 to-indigo-600/90 text-white/90 border border-white/10 px-4 py-2 hover:brightness-125 transition-all"
+        <div className="mt-4 border-t border-border pt-10 md:mt-6">
+          <h3 className="mb-3 font-display text-xl font-semibold text-foreground">
+            {copy.technologiesTitle}
+          </h3>
+          <p className="mb-6 max-w-[65ch] text-foreground/70">{copy.technologiesIntro}</p>
+          <div className="flex flex-wrap gap-2">
+            {tools.map((tool) => (
+              <span
+                key={tool}
+                className="rounded border border-border px-2.5 py-1 font-mono text-xs text-foreground/70 transition-colors hover:border-foreground hover:bg-accent/10 hover:text-foreground"
               >
                 {tool}
-              </Badge>
+              </span>
             ))}
           </div>
         </div>

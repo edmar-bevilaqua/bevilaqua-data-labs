@@ -13,15 +13,17 @@ const Support = ({ language, setLanguage }: SupportProps) => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <Navbar language={language} setLanguage={setLanguage} />
-      <main className="px-6 md:px-12 lg:px-24 pt-32 pb-20">
+      <main id="main-content" className="px-6 md:px-12 lg:px-24 pt-32 pb-20">
         <div className="max-w-4xl mx-auto">
-          <h1 className="section-heading">{copy.title}</h1>
+          <h1 className="font-display text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-4">
+            {copy.title}
+          </h1>
           <p className="text-lg text-foreground/80 mb-10">{copy.intro}</p>
-          <div className="space-y-6">
+          <div className="divide-y divide-border border-t border-border">
             {copy.sections.map((section) => (
-              <section key={section.title} className="glass-card p-6 rounded-lg">
-                <h2 className="text-2xl font-semibold mb-3">{section.title}</h2>
-                <p className="text-foreground/75 leading-relaxed">{section.body}</p>
+              <section key={section.title} className="py-6">
+                <h2 className="text-xl font-display font-semibold mb-3 text-foreground">{section.title}</h2>
+                <p className="text-foreground/75 leading-relaxed max-w-[70ch]">{section.body}</p>
               </section>
             ))}
           </div>

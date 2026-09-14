@@ -23,12 +23,12 @@ const NotFound = ({ language, setLanguage }: NotFoundProps) => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <Navbar language={language} setLanguage={setLanguage} />
-      <main className="min-h-screen flex items-center justify-center px-6">
-        <div className="text-center glass-card p-10 rounded-lg max-w-xl">
-          <p className="text-blue-300 mb-4">404</p>
-          <h1 className="text-4xl font-bold mb-4">{copy.title}</h1>
-          <p className="text-xl text-foreground/70 mb-6">{copy.description}</p>
-          <a href="/" className="text-blue-300 hover:text-blue-200 underline">
+      <main id="main-content" className="flex min-h-[100dvh] items-center justify-center px-6">
+        <div className="max-w-xl rounded-md border border-border p-10 text-center">
+          <p className="mb-4 font-mono text-sm text-muted-foreground">404</p>
+          <h1 className="mb-4 font-display text-4xl font-semibold tracking-tight text-foreground">{copy.title}</h1>
+          <p className="mb-6 text-xl text-foreground/70">{copy.description}</p>
+          <a href="/" className="text-foreground underline hover:text-muted-foreground">
             {copy.link}
           </a>
         </div>

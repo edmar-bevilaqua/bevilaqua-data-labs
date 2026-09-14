@@ -1,8 +1,10 @@
 
 import React from 'react';
-import { ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Language, siteContent } from '@/content/siteContent';
+import { useScrollToSection } from '@/hooks/useScrollToSection';
+import { useInView, revealClass } from '@/hooks/useInView';
+import BeviMark from './BeviMark';
 
 interface HeroSectionProps {
   language: Language;
@@ -10,59 +12,46 @@ interface HeroSectionProps {
 
 const HeroSection = ({ language }: HeroSectionProps) => {
   const copy = siteContent[language].hero;
-
-  const scrollToSection = (sectionId: string) => (e: React.MouseEvent) => {
-      e.preventDefault();
-      const section = document.getElementById(sectionId);
-      
-      if (section) {
-        window.scrollTo({
-          top: section.offsetTop, // Offset to account for fixed navbar
-          behavior: 'smooth'
-        });
-      }
-    };
+  const brand = siteContent[language].brand;
+  const scrollToSection = useScrollToSection();
+  const { ref, isVisible } = useInView<HTMLDivElement>();
 
   return (
-    <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-hero-gradient opacity-70 z-0"></div>
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJncmlkIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPjxwYXRoIGQ9Ik0gNDAgMCBMIDAgMCAwIDQwIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-30 z-0"></div>
-      
-      <div className="z-10 animate-fade-in">
-        <p className="text-sm md:text-base uppercase tracking-[0.3em] text-blue-300/80 mb-4">
-          {copy.eyebrow}
+    <section className="relative flex min-h-[100dvh] items-center overflow-hidden px-6 pt-24 md:px-12 lg:px-24">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-24 top-1/2 hidden -translate-y-1/2 opacity-[0.07] lg:block"
+      >
+        <BeviMark size={560} />
+      </div>
+
+      <div ref={ref} className={`relative z-10 max-w-3xl ${revealClass(isVisible)}`}>
+        <p className="mb-6 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
+          {brand}
         </p>
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">
-          <span className="block gradient-text text-5xl md:text-7xl lg:text-8xl mt-2">{copy.title}</span>
+        <h1 className="font-display text-4xl font-semibold leading-[1.1] tracking-tight text-foreground md:text-5xl lg:text-6xl">
+          {copy.headline}
         </h1>
-        <p className="text-xl md:text-2xl text-foreground/80 max-w-2xl mb-8">
+        <p className="mt-6 max-w-xl text-lg text-foreground/70 md:text-xl">
           {copy.subtitle}
         </p>
-        <p className="text-base md:text-lg text-foreground/70 max-w-3xl mb-8">
-          {copy.description}
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="mt-10 flex flex-wrap gap-4">
           <Button
-            className="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 border-none text-white font-medium px-6 py-2"
+            size="lg"
+            className="bg-accent text-accent-foreground transition-transform hover:bg-accent/90 active:scale-[0.98]"
             onClick={scrollToSection('contact')}
           >
             {copy.primaryCta}
           </Button>
           <Button
-            className="border-white/20 hover:bg-white/10"
+            size="lg"
+            variant="outline"
+            className="border-border text-foreground transition-colors hover:border-foreground hover:bg-accent/10 active:scale-[0.98]"
             onClick={scrollToSection('solutions')}
           >
             {copy.secondaryCta}
           </Button>
         </div>
-      </div>
-      
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <a href=""
-            onClick={scrollToSection('about')}
-          >
-            <ArrowDown className="w-6 h-6" />
-          </a>
       </div>
     </section>
   );

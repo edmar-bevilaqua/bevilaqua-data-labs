@@ -18,11 +18,13 @@ const Index = ({ language, setLanguage }: IndexProps) => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <Navbar language={language} setLanguage={setLanguage} />
-      <HeroSection language={language} />
-      <AboutSection language={language} />
-      <SkillsSection language={language} />
-      <ProjectsSection language={language} />
-      <ContactSection language={language} />
+      <main id="main-content">
+        <HeroSection language={language} />
+        <AboutSection language={language} />
+        <SkillsSection language={language} />
+        <ProjectsSection language={language} />
+        <ContactSection language={language} />
+      </main>
       <Footer language={language} />
     </div>
   );

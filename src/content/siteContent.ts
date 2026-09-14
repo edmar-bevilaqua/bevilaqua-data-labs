@@ -18,14 +18,10 @@ export const siteContent = {
       support: 'Suporte',
     },
     hero: {
-      eyebrow: 'Dados, IA e software aplicados ao negócio',
-      title: 'Bevilaqua Data Labs',
-      subtitle:
-        'Soluções em dados, inteligência artificial e software para transformar informação em decisões, automações e produtos digitais confiáveis.',
-      description:
-        'Desenvolvemos pipelines de dados, modelos preditivos, análises avançadas e aplicações orientadas por dados com foco em clareza técnica, impacto de negócio e manutenção sustentável.',
-      primaryCta: 'Fale com a Bevilaqua Data Labs',
-      secondaryCta: 'Conheça as soluções',
+      headline: 'Transformamos dados em decisões, automações e produtos digitais confiáveis.',
+      subtitle: 'Dados, IA e software aplicados ao negócio, para times de tecnologia e de operação.',
+      primaryCta: 'Fale conosco',
+      secondaryCta: 'Ver os labs',
     },
     about: {
       title: 'Sobre a empresa',
@@ -52,17 +48,17 @@ export const siteContent = {
     services: {
       title: 'Serviços',
       intro:
-        'Atuamos em frentes complementares para transformar dados em valor prático, sempre ajustando tecnologia e escopo ao contexto de cada projeto.',
+        'Construímos pipelines de dados, modelos preditivos, análises avançadas e aplicações orientadas por dados, ajustando tecnologia e escopo ao contexto de cada projeto.',
       items: [
-        {
-          title: 'Ciência de Dados e Machine Learning',
-          description:
-            'Modelos preditivos, análise exploratória, experimentos, validação de hipóteses e soluções orientadas por dados.',
-        },
         {
           title: 'Engenharia de Dados',
           description:
             'Pipelines, automação de fluxos, preparação de bases analíticas e estruturação de dados para BI, IA e produtos digitais.',
+        },
+        {
+          title: 'Ciência de Dados e Machine Learning',
+          description:
+            'Modelos preditivos, análise exploratória, experimentos, validação de hipóteses e soluções orientadas por dados.',
         },
         {
           title: 'Business Intelligence e Analytics',
@@ -89,27 +85,42 @@ export const siteContent = {
       intro:
         'Alguns estudos e implementações técnicas demonstram a aplicação prática de métodos de ciência de dados, machine learning e engenharia para problemas reais ou simulados, sem caracterizá-los como cases de clientes.',
       repositoryLabel: 'Repositório',
+      labels: {
+        problem: 'Problema',
+        method: 'Método',
+        relevance: 'Relevância',
+      },
+      repoList: {
+        title: 'Todos os repositórios',
+        intro: 'Lista gerada automaticamente a partir do meu perfil público no GitHub.',
+        viewAll: 'Ver perfil no GitHub',
+        error: 'Não foi possível carregar os repositórios agora.',
+        empty: 'Nenhum outro repositório público no momento.',
+      },
       items: [
         {
-          title: 'Laboratório de Ciência de Dados',
-          description:
-            'Coleção de estudos envolvendo limpeza, análise, visualização, aprendizado de máquina, deep learning e preparação de dados para diferentes contextos analíticos.',
-          tags: ['Python', 'Scikit-Learn', 'Pandas', 'NumPy', 'Visualização'],
-          githubLink: 'https://github.com/edmar-bevilaqua/data_science',
+          title: 'Detecção de padrões em redes transacionais',
+          problem: 'Identificar padrões suspeitos de lavagem de dinheiro em uma rede de transações financeiras sintéticas.',
+          method: 'Redes neurais em grafos (Graph Neural Networks) com PyTorch Geometric, explorando relações entre entidades e eventos na rede transacional.',
+          relevance: 'Mostra como deep learning em grafos pode apoiar detecção de fraude e compliance, sem expor dados reais de clientes.',
+          tags: ['Deep Learning', 'Graph Neural Networks', 'PyTorch Geometric'],
+          githubLink: 'https://github.com/edmar-bevilaqua/anti-money-laundering-project',
         },
         {
           title: 'Previsão de demanda e séries temporais',
-          description:
-            'Sistema de previsão baseado em ensemble learning para demanda de vendas, com validação, ajuste de hiperparâmetros e comparação de desempenho em competição pública.',
+          problem: 'Prever a demanda de vendas de múltiplas lojas e produtos a partir de dados históricos de uma competição pública no Kaggle.',
+          method: 'Modelos de ensemble learning para séries temporais, com validação cruzada temporal, ajuste de hiperparâmetros e comparação sistemática de desempenho.',
+          relevance: 'Demonstra um fluxo completo de forecasting, da preparação dos dados à avaliação comparativa de modelos.',
           tags: ['Séries Temporais', 'Ensemble Learning', 'Validação', 'Forecasting'],
           githubLink: 'https://github.com/edmar-bevilaqua/store-sales-tsf-kaggle-competition',
         },
         {
-          title: 'Detecção de padrões em redes transacionais',
-          description:
-            'Aplicação de redes neurais em grafos para identificar padrões suspeitos em transações financeiras sintéticas, explorando relações entre entidades e eventos.',
-          tags: ['Deep Learning', 'Graph Neural Networks', 'PyTorch Geometric'],
-          githubLink: 'https://github.com/edmar-bevilaqua/anti-money-laundering-project',
+          title: 'Laboratório de Ciência de Dados',
+          problem: 'Consolidar experimentos e técnicas de ciência de dados que sustentam outros projetos, em vez de um único caso aplicado.',
+          method: 'Notebooks e scripts cobrindo limpeza, análise exploratória, visualização, aprendizado de máquina e deep learning aplicados a diferentes conjuntos de dados.',
+          relevance: 'Serve como base de estudo e experimentação contínua, mostrando amplitude técnica além de casos isolados.',
+          tags: ['Python', 'Scikit-Learn', 'Pandas', 'NumPy', 'Visualização'],
+          githubLink: 'https://github.com/edmar-bevilaqua/data_science',
         },
       ],
     },
@@ -129,9 +140,12 @@ export const siteContent = {
         message: 'Mensagem',
         messagePlaceholder: 'Conte brevemente sobre sua demanda',
         submit: 'Enviar mensagem',
-        requiredAlert: 'Por favor, preencha nome, email e mensagem antes de enviar.',
-        successAlert: 'Mensagem enviada com sucesso.',
-        errorAlert: 'Ocorreu um erro ao enviar a mensagem. Tente novamente.',
+        sending: 'Enviando...',
+        nameRequired: 'Informe seu nome.',
+        emailInvalid: 'Informe um email válido.',
+        messageRequired: 'Escreva uma mensagem.',
+        successMessage: 'Mensagem enviada com sucesso. Retornaremos em breve.',
+        errorMessage: 'Não foi possível enviar a mensagem. Tente novamente ou escreva para edmar.bevi@gmail.com.',
       },
     },
     footer: {
@@ -196,14 +210,10 @@ export const siteContent = {
       support: 'Support',
     },
     hero: {
-      eyebrow: 'Data, AI and software for business outcomes',
-      title: 'Bevilaqua Data Labs',
-      subtitle:
-        'Data, artificial intelligence and software solutions that turn information into decisions, automation and reliable digital products.',
-      description:
-        'We build data pipelines, predictive models, advanced analytics and data-driven applications with a focus on technical clarity, business impact and sustainable maintenance.',
-      primaryCta: 'Contact Bevilaqua Data Labs',
-      secondaryCta: 'Explore solutions',
+      headline: 'Data, AI, and software turned into reliable business systems.',
+      subtitle: 'Data, AI and software applied to the business, for technology and operations teams.',
+      primaryCta: 'Talk to us',
+      secondaryCta: 'See the labs',
     },
     about: {
       title: 'About the company',
@@ -230,17 +240,17 @@ export const siteContent = {
     services: {
       title: 'Services',
       intro:
-        'We work across complementary areas to turn data into practical value, matching technology and scope to each project context.',
+        'We build data pipelines, predictive models, advanced analytics and data-driven applications, matching technology and scope to each project context.',
       items: [
-        {
-          title: 'Data Science and Machine Learning',
-          description:
-            'Predictive models, exploratory analysis, experiments, hypothesis validation and data-driven solutions.',
-        },
         {
           title: 'Data Engineering',
           description:
             'Pipelines, workflow automation, analytical datasets and data foundations for BI, AI and digital products.',
+        },
+        {
+          title: 'Data Science and Machine Learning',
+          description:
+            'Predictive models, exploratory analysis, experiments, hypothesis validation and data-driven solutions.',
         },
         {
           title: 'Business Intelligence and Analytics',
@@ -267,27 +277,42 @@ export const siteContent = {
       intro:
         'Selected studies and technical implementations demonstrate practical applications of data science, machine learning and engineering methods for real or simulated problems, without presenting them as client case studies.',
       repositoryLabel: 'Repository',
+      labels: {
+        problem: 'Problem',
+        method: 'Method',
+        relevance: 'Relevance',
+      },
+      repoList: {
+        title: 'All repositories',
+        intro: 'Automatically generated from my public GitHub profile.',
+        viewAll: 'View GitHub profile',
+        error: 'Could not load repositories right now.',
+        empty: 'No other public repositories at the moment.',
+      },
       items: [
         {
-          title: 'Data Science Lab',
-          description:
-            'A collection of studies covering cleaning, analysis, visualization, machine learning, deep learning and data preparation for different analytical contexts.',
-          tags: ['Python', 'Scikit-Learn', 'Pandas', 'NumPy', 'Visualization'],
-          githubLink: 'https://github.com/edmar-bevilaqua/data_science',
+          title: 'Pattern detection in transactional networks',
+          problem: 'Identify suspicious money-laundering patterns in a network of synthetic financial transactions.',
+          method: 'Graph neural networks (PyTorch Geometric) exploring relationships between entities and events in the transactional network.',
+          relevance: 'Shows how graph-based deep learning can support fraud detection and compliance work, without exposing real customer data.',
+          tags: ['Deep Learning', 'Graph Neural Networks', 'PyTorch Geometric'],
+          githubLink: 'https://github.com/edmar-bevilaqua/anti-money-laundering-project',
         },
         {
           title: 'Demand forecasting and time series',
-          description:
-            'A forecasting system based on ensemble learning for sales demand, including validation, hyperparameter tuning and performance comparison in a public competition.',
+          problem: 'Forecast sales demand across multiple stores and products using historical data from a public Kaggle competition.',
+          method: 'Ensemble learning models for time series, with time-aware cross-validation, hyperparameter tuning and systematic performance comparison.',
+          relevance: 'Demonstrates a complete forecasting workflow, from data preparation to comparative model evaluation.',
           tags: ['Time Series', 'Ensemble Learning', 'Validation', 'Forecasting'],
           githubLink: 'https://github.com/edmar-bevilaqua/store-sales-tsf-kaggle-competition',
         },
         {
-          title: 'Pattern detection in transactional networks',
-          description:
-            'Graph neural network application to identify suspicious patterns in synthetic financial transactions, exploring relationships between entities and events.',
-          tags: ['Deep Learning', 'Graph Neural Networks', 'PyTorch Geometric'],
-          githubLink: 'https://github.com/edmar-bevilaqua/anti-money-laundering-project',
+          title: 'Data Science Lab',
+          problem: 'Consolidate the data science experiments and techniques that support other projects, rather than a single applied case.',
+          method: 'Notebooks and scripts covering data cleaning, exploratory analysis, visualization, machine learning and deep learning across different datasets.',
+          relevance: 'Serves as a base for continuous study and experimentation, showing technical breadth beyond isolated projects.',
+          tags: ['Python', 'Scikit-Learn', 'Pandas', 'NumPy', 'Visualization'],
+          githubLink: 'https://github.com/edmar-bevilaqua/data_science',
         },
       ],
     },
@@ -307,9 +332,12 @@ export const siteContent = {
         message: 'Message',
         messagePlaceholder: 'Briefly describe your request',
         submit: 'Send message',
-        requiredAlert: 'Please fill in name, email and message before sending.',
-        successAlert: 'Message sent successfully.',
-        errorAlert: 'An error occurred while sending the message. Please try again.',
+        sending: 'Sending...',
+        nameRequired: 'Enter your name.',
+        emailInvalid: 'Enter a valid email.',
+        messageRequired: 'Write a message.',
+        successMessage: 'Message sent successfully. We will get back to you soon.',
+        errorMessage: 'We could not send your message. Please try again or email edmar.bevi@gmail.com.',
       },
     },
     footer: {

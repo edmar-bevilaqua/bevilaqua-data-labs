@@ -24,7 +24,7 @@ interface ContactSectionProps {
   language: Language;
 }
 
-const CONTACT_EMAIL = 'edmar.bevi@gmail.com';
+const CONTACT_EMAIL = 'edmar.bevilaqua@bevilaquadatalabs.com';
 const EMAILJS_SERVICE_ID = 'service_9w4s4j6';
 const EMAILJS_TEMPLATE_ID = 'template_2f545m9';
 

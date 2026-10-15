@@ -1,39 +1,45 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
+    --background: 222 47% 7%;
+    --foreground: 210 40% 96%;
 
-    --card: 222 47% 11%;
-    --card-foreground: 210 40% 98%;
+    --card: 222 44% 10%;
+    --card-foreground: 210 40% 96%;
 
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 222 44% 10%;
+    --popover-foreground: 210 40% 96%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222 47% 11%;
+    --primary: 199 89% 60%;
+    --primary-foreground: 222 47% 7%;
 
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 217 33% 14%;
+    --secondary-foreground: 210 40% 96%;
 
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 217 33% 14%;
+    --muted-foreground: 215 18% 62%;
 
-    --accent: 217 33% 17%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 217 33% 16%;
+    --accent-foreground: 210 40% 96%;
 
     --destructive: 0 63% 31%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 213 27% 84%;
+    --border: 216 28% 18%;
+    --input: 216 28% 18%;
+    --ring: 199 89% 60%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Telemetry / Heatmap scale (Deep Obsidian -> Cyan/Emerald) */
+    --heat-0: #111827;
+    --heat-1: #0c4a6e;
+    --heat-2: #0284c7;
+    --heat-3: #38bdf8;
+    --heat-4: #34d399;
   }
 }
 
@@ -42,26 +48,125 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased selection:bg-sky-500/30 selection:text-sky-200;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
+  h1, h2, h3, .font-display {
+    font-family: "Schibsted Grotesk", "Instrument Sans", sans-serif;
+  }
+}
+
+@layer components {
   .glass-card {
-    @apply bg-card/70 backdrop-blur-sm border border-white/10 shadow-lg;
+    @apply bg-card/80 backdrop-blur-md border border-white/10 shadow-lg;
+  }
+
+  .spotlight-card {
+    position: relative;
+    isolation: isolate;
+    background: hsl(var(--card) / 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition:
+      border-color 0.3s ease,
+      transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+      box-shadow 0.35s ease;
+  }
+
+  .spotlight-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: -1;
+    background: radial-gradient(
+      380px circle at var(--mx, 50%) var(--my, 50%),
+      rgba(56, 189, 248, 0.13),
+      transparent 64%
+    );
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+
+  @media (hover: hover) {
+    .spotlight-card:hover {
+      border-color: rgba(56, 189, 248, 0.42);
+    }
+
+    .spotlight-card:hover::after {
+      opacity: 1;
+    }
+
+    .spotlight-lift:hover {
+      transform: translateY(-3px);
+    }
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-cyan-300 to-indigo-400;
   }
 
   .section-heading {
-    @apply text-3xl md:text-4xl font-bold mb-8 gradient-text;
+    @apply font-display text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-foreground;
+    letter-spacing: -0.03em;
   }
-  
+
+  .section-kicker {
+    @apply font-mono text-xs uppercase tracking-widest text-sky-400 mb-3 flex items-center gap-3;
+  }
+
   .section-spacing {
-    @apply py-16 md:py-24;
+    @apply py-20 md:py-28;
   }
+}
+
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.ticker-mask {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 55s linear infinite;
+}
+
+.ticker-mask:hover .ticker-track {
+  animation-play-state: paused;
+}
+
+@keyframes float-up-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.92);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-22px) scale(1);
+  }
+}
+
+.animate-plus-badge {
+  animation: float-up-fade 1.15s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
 #root {

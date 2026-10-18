@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Language, siteContent } from '@/content/siteContent';
+import BeviMark from './BeviMark';
 
 interface NavbarProps {
   language: Language;
@@ -89,25 +90,14 @@ const Navbar = ({ language, setLanguage }: NavbarProps) => {
 
       <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-background/85 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3.5 md:px-12">
-          {/* Brand Logo with 3x3 Telemetry Matrix Icon */}
+          {/* Brand Logo with BeviMark Droplet Node Mesh */}
           <Link
             to="/"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="group flex items-center gap-2.5 font-display text-base font-bold tracking-tight text-foreground"
+            className="group flex items-center gap-3 font-display text-base font-bold tracking-tight text-foreground"
           >
-            <span
-              aria-hidden="true"
-              className="grid grid-cols-3 gap-[2px] p-0.5 transition-transform duration-300 group-hover:scale-110"
-            >
-              <b className="h-[5px] w-[5px] rounded-[1px] bg-sky-500" />
-              <b className="h-[5px] w-[5px] rounded-[1px] bg-emerald-400" />
-              <b className="h-[5px] w-[5px] rounded-[1px] bg-sky-900" />
-              <b className="h-[5px] w-[5px] rounded-[1px] bg-emerald-400" />
-              <b className="h-[5px] w-[5px] rounded-[1px] bg-sky-400" />
-              <b className="h-[5px] w-[5px] rounded-[1px] bg-emerald-400" />
-              <b className="h-[5px] w-[5px] rounded-[1px] bg-sky-900" />
-              <b className="h-[5px] w-[5px] rounded-[1px] bg-emerald-400" />
-              <b className="h-[5px] w-[5px] rounded-[1px] bg-sky-500" />
+            <span className="transition-transform duration-300 group-hover:scale-110 drop-shadow-[0_0_8px_rgba(34,228,245,0.35)]">
+              <BeviMark size={26} />
             </span>
             <span className="gradient-text font-extrabold">{copy.brand}</span>
           </Link>
@@ -135,27 +125,6 @@ const Navbar = ({ language, setLanguage }: NavbarProps) => {
                 </a>
               );
             })}
-            <span className="mx-1.5 h-4 w-px bg-white/10" />
-            <Link
-              to="/privacy"
-              className={`rounded-lg px-2.5 py-1.5 text-xs font-mono transition-colors ${
-                location.pathname === '/privacy'
-                  ? 'text-sky-400'
-                  : 'text-foreground/55 hover:text-foreground'
-              }`}
-            >
-              {copy.nav.privacy}
-            </Link>
-            <Link
-              to="/support"
-              className={`rounded-lg px-2.5 py-1.5 text-xs font-mono transition-colors ${
-                location.pathname === '/support'
-                  ? 'text-sky-400'
-                  : 'text-foreground/55 hover:text-foreground'
-              }`}
-            >
-              {copy.nav.support}
-            </Link>
           </nav>
 
           {/* Language Switcher & Mobile Menu Button */}
@@ -210,22 +179,6 @@ const Navbar = ({ language, setLanguage }: NavbarProps) => {
                   {item.label}
                 </a>
               ))}
-              <div className="flex gap-4 border-t border-white/10 pt-3">
-                <Link
-                  to="/privacy"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="font-mono text-xs text-foreground/60 hover:text-sky-400"
-                >
-                  {copy.nav.privacy}
-                </Link>
-                <Link
-                  to="/support"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="font-mono text-xs text-foreground/60 hover:text-sky-400"
-                >
-                  {copy.nav.support}
-                </Link>
-              </div>
             </div>
           </div>
         )}

@@ -1,14 +1,23 @@
 import React from 'react';
-import { ArrowUpRight, Terminal, ShieldCheck, Cpu, LineChart } from 'lucide-react';
+import { ShieldCheck, Cpu, LineChart } from 'lucide-react';
+import { SiGithub, SiGmail, SiInstagram, SiLinkedin } from 'react-icons/si';
 import { Language, siteContent } from '@/content/siteContent';
+import BeviMark from './BeviMark';
+import { SectionNodeStation } from './SectionGraphSpine';
 
 interface AboutSectionProps {
   language: Language;
+  isNodeActive?: boolean;
+  isNodeCurrent?: boolean;
 }
 
 const principleIcons = [LineChart, ShieldCheck, Cpu];
 
-const AboutSection = ({ language }: AboutSectionProps) => {
+const AboutSection = ({
+  language,
+  isNodeActive = true,
+  isNodeCurrent = false,
+}: AboutSectionProps) => {
   const copy = siteContent[language].about;
 
   const handlePointerMove = (e: React.PointerEvent<HTMLElement>) => {
@@ -18,20 +27,25 @@ const AboutSection = ({ language }: AboutSectionProps) => {
   };
 
   return (
-    <section id="about" className="section-spacing px-6 md:px-12 lg:px-24 relative">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-          {/* Sticky Left Column: Founder Profile & Telemetry Card */}
+    <section id="about" className="section-spacing px-4 sm:px-6 md:px-12 lg:px-24 relative">
+      <SectionNodeStation
+        sectionKey="about"
+        language={language}
+        isActive={isNodeActive}
+        isCurrent={isNodeCurrent}
+      >
+        <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:items-center lg:gap-14">
+          {/* Sticky Left Column: Founder Profile Card */}
           <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-4">
             <div
               onPointerMove={handlePointerMove}
-              className="spotlight-card rounded-2xl p-6 md:p-7 space-y-5"
+              className="spotlight-card rounded-2xl p-5 pb-3 sm:p-6 sm:pb-3 md:px-7 md:pt-7 md:pb-3 space-y-5"
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <span className="inline-flex items-center gap-1.5 font-mono text-xs text-emerald-400 mb-1.5">
                     <span className="h-2 w-2 rounded-full bg-emerald-400" />
-                    Lead Profile
+                    {copy.founderCard.label}
                   </span>
                   <h3 className="font-display text-2xl font-bold text-foreground">
                     {copy.founderCard.name}
@@ -40,10 +54,20 @@ const AboutSection = ({ language }: AboutSectionProps) => {
                     {copy.founderCard.role}
                   </p>
                 </div>
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-sky-400/30 bg-sky-400/10 font-mono text-sm font-bold text-sky-300">
-                  EB
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-sky-400/30 bg-sky-400/10">
+                  <BeviMark size={24} />
                 </div>
               </div>
+
+              <img
+                src="/edmar-pixel-art.png"
+                alt={
+                  language === 'pt'
+                    ? 'Retrato de Edmar Bevilaqua em pixel art'
+                    : 'Pixel-art portrait of Edmar Bevilaqua'
+                }
+                className="mx-auto h-64 w-full object-contain object-bottom sm:h-72"
+              />
 
               <p className="text-sm text-foreground/75 leading-relaxed">
                 {copy.founderCard.bio}
@@ -60,40 +84,45 @@ const AboutSection = ({ language }: AboutSectionProps) => {
                 ))}
               </div>
 
-              <div className="grid grid-cols-2 gap-2.5 pt-2 border-t border-white/10">
+              <div className="grid grid-cols-4 items-center justify-items-center gap-2 border-t border-white/10 py-3">
                 <a
                   href="https://www.linkedin.com/in/edmar-bevilaqua/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-between rounded-lg border border-white/10 bg-background/60 px-3 py-2 font-mono text-xs text-foreground/80 hover:border-sky-400/50 hover:text-sky-300 transition-colors"
+                  aria-label="LinkedIn"
+                  title="LinkedIn"
+                  className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-md border border-white/10 bg-background/60 text-foreground/80 transition-colors hover:border-sky-400/50 hover:text-sky-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
                 >
-                  <span>LinkedIn</span>
-                  <ArrowUpRight className="h-3.5 w-3.5 text-sky-400" />
+                  <SiLinkedin aria-hidden="true" className="h-7 w-7" />
                 </a>
                 <a
                   href="https://github.com/edmar-bevilaqua"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-between rounded-lg border border-white/10 bg-background/60 px-3 py-2 font-mono text-xs text-foreground/80 hover:border-sky-400/50 hover:text-sky-300 transition-colors"
+                  aria-label="GitHub"
+                  title="GitHub"
+                  className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-md border border-white/10 bg-background/60 text-foreground/80 transition-colors hover:border-sky-400/50 hover:text-sky-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
                 >
-                  <span>GitHub</span>
-                  <ArrowUpRight className="h-3.5 w-3.5 text-sky-400" />
+                  <SiGithub aria-hidden="true" className="h-7 w-7" />
                 </a>
-              </div>
-            </div>
-
-            {/* Commit / Telemetry Card */}
-            <div className="rounded-xl border border-white/10 bg-background/90 p-3.5 font-mono text-xs space-y-1.5">
-              <div className="flex items-center justify-between text-foreground/50">
-                <span className="inline-flex items-center gap-1.5 text-sky-400 font-medium">
-                  <Terminal className="h-3.5 w-3.5" />
-                  {copy.telemetryHash}
-                </span>
-                <span>{copy.telemetryStep}</span>
-              </div>
-              <div className="text-foreground/85 truncate">
-                <span className="text-emerald-400">feat(identity):</span>{' '}
-                {copy.telemetryCommit.replace('feat(identity): ', '')}
+                <a
+                  href="mailto:edmar.bevi@gmail.com"
+                  aria-label={language === 'pt' ? 'Enviar e-mail' : 'Send an email'}
+                  title="Gmail"
+                  className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-md border border-white/10 bg-background/60 text-foreground/80 transition-colors hover:border-sky-400/50 hover:text-sky-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+                >
+                  <SiGmail aria-hidden="true" className="h-7 w-7" />
+                </a>
+                <a
+                  href="https://www.instagram.com/edmar_bevilaqua/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  title="Instagram"
+                  className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-md border border-white/10 bg-background/60 text-foreground/80 transition-colors hover:border-sky-400/50 hover:text-sky-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+                >
+                  <SiInstagram aria-hidden="true" className="h-7 w-7" />
+                </a>
               </div>
             </div>
           </div>
@@ -101,27 +130,6 @@ const AboutSection = ({ language }: AboutSectionProps) => {
           {/* Right Column: Narrative & Engineering Principles */}
           <div className="lg:col-span-7 space-y-8">
             <div>
-              <div className="section-kicker">
-                <span>{copy.kicker}</span>
-                <span aria-hidden="true" className="hidden sm:inline-flex items-center gap-1">
-                  {[2, 4, 3, 1, 4, 3, 2, 4, 3, 4].map((lvl, i) => (
-                    <i
-                      key={i}
-                      className="inline-block h-2 w-2 rounded-[2px]"
-                      style={{
-                        backgroundColor:
-                          lvl === 4
-                            ? '#34d399'
-                            : lvl === 3
-                            ? '#38bdf8'
-                            : lvl === 2
-                            ? '#0284c7'
-                            : '#0c4a6e',
-                      }}
-                    />
-                  ))}
-                </span>
-              </div>
               <h2 className="section-heading">{copy.title}</h2>
             </div>
 
@@ -149,12 +157,12 @@ const AboutSection = ({ language }: AboutSectionProps) => {
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-sky-400/25 bg-sky-400/10 text-sky-400">
                       <Icon className="h-5 w-5" />
                     </div>
-                    <div className="space-y-1.5">
-                      <div className="flex items-center gap-2.5">
-                        <span className="font-mono text-xs text-sky-400">
+                    <div className="min-w-0 flex-1 space-y-1.5">
+                      <div className="flex min-w-0 items-center gap-2.5">
+                        <span className="shrink-0 whitespace-nowrap font-mono text-xs text-sky-400">
                           {principle.code}
                         </span>
-                        <h3 className="font-display text-lg md:text-xl font-bold text-foreground">
+                        <h3 className="min-w-0 font-display text-lg md:text-xl font-bold text-foreground">
                           {principle.title}
                         </h3>
                       </div>
@@ -168,7 +176,7 @@ const AboutSection = ({ language }: AboutSectionProps) => {
             </div>
           </div>
         </div>
-      </div>
+      </SectionNodeStation>
     </section>
   );
 };

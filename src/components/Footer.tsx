@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Language, siteContent } from '@/content/siteContent';
+import BeviMark from './BeviMark';
 
 interface FooterProps {
   language: Language;
@@ -31,12 +32,11 @@ const Footer = ({ language }: FooterProps) => {
   return (
     <footer className="border-t border-white/10 bg-background py-8 px-6 md:px-12 lg:px-24">
       <div className="mx-auto max-w-7xl flex flex-col md:flex-row justify-between items-center gap-4 font-mono text-xs text-foreground/55">
-        <div className="flex flex-col sm:flex-row items-center gap-2">
+        <div className="flex flex-col sm:flex-row items-center gap-2.5">
+          <BeviMark size={20} />
           <span>
-            © {new Date().getFullYear()} {copy.brand} · {copy.founder}.
+            © {new Date().getFullYear()} {copy.brand}. {copy.footer.rights}
           </span>
-          <span className="hidden sm:inline">·</span>
-          <span>{copy.footer.rights}</span>
         </div>
 
         <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2">

@@ -16,9 +16,9 @@ const App = () => {
   const [language, setLanguageState] = useState<Language>(() => {
     try {
       const saved = localStorage.getItem("bdl-lang");
-      return saved === "en" ? "en" : "pt";
+      return saved === "pt" ? "pt" : "en";
     } catch {
-      return "pt";
+      return "en";
     }
   });
 

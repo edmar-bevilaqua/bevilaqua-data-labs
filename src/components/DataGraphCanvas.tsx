@@ -3,7 +3,7 @@ import { Language, siteContent } from '@/content/siteContent';
 
 interface DataGraphCanvasProps {
   language: Language;
-  initialCount: number;
+  initialCount: number | null;
 }
 
 // 5x7 pixel font bitmaps for spelling "BEVILAQUA DATA LABS" in the telemetry matrix
@@ -63,7 +63,6 @@ const DataGraphCanvas: React.FC<DataGraphCanvasProps> = ({ language, initialCoun
   const copy = siteContent[language].hero.graph;
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [extraPulses, setExtraPulses] = useState(0);
   const [badges, setBadges] = useState<{ id: number; text: string }[]>([]);
   const pointerRef = useRef<{ x: number; y: number }>({ x: -10000, y: -10000 });
   const wavesRef = useRef<RippleWave[]>([]);
@@ -97,12 +96,12 @@ const DataGraphCanvas: React.FC<DataGraphCanvasProps> = ({ language, initialCoun
 
     const setupGrid = () => {
       width = container.clientWidth || 800;
-      const maxH = Math.min(window.innerHeight * 0.36, 310);
+      const maxH = Math.max(260, Math.min(window.innerHeight * 0.46, 420));
 
+      const twoTierLines = ['BEVILAQUA', 'DATA LABS'];
       const candidates = [
-        { lines: ['BEVILAQUA', 'DATA LABS'], scale: 2, minPitch: 7.2 },
-        { lines: ['BEVILAQUA LABS'], scale: 2, minPitch: 6.0 },
-        { lines: ['BEVILAQUA', 'DATA LABS'], scale: 1, minPitch: 0 },
+        { lines: twoTierLines, scale: 2, minPitch: 6.0 },
+        { lines: twoTierLines, scale: 1, minPitch: 0 },
       ];
 
       let chosen = candidates[candidates.length - 1];
@@ -110,7 +109,7 @@ const DataGraphCanvas: React.FC<DataGraphCanvasProps> = ({ language, initialCoun
       for (const cand of candidates) {
         const testBm = buildBitmap(cand.lines);
         const colsNeeded = (testBm.w + 4) * cand.scale;
-        const rowsNeeded = (testBm.h + 4) * cand.scale;
+        const rowsNeeded = (testBm.h + 6) * cand.scale;
         const testPitch = Math.min(width / colsNeeded, maxH / rowsNeeded);
         if (testPitch >= cand.minPitch) {
           chosen = cand;
@@ -120,7 +119,7 @@ const DataGraphCanvas: React.FC<DataGraphCanvasProps> = ({ language, initialCoun
       }
 
       const scale = chosen.scale;
-      const rows = (bm.h + 4) * scale;
+      const rows = (bm.h + 6) * scale;
       const rawPitch = Math.min(width / ((bm.w + 4) * scale), maxH / rows);
       pitch = Math.max(4.5, Math.min(15, rawPitch));
       cellSize = pitch * 0.78;
@@ -129,7 +128,7 @@ const DataGraphCanvas: React.FC<DataGraphCanvasProps> = ({ language, initialCoun
       let totalCols = Math.floor(width / pitch);
       if ((totalCols - textCols) % 2 !== 0) totalCols--;
       const marginCols = (totalCols - textCols) / 2;
-      const marginRow = 2 * scale;
+      const marginRow = 3 * scale;
       const offsetX = (width - totalCols * pitch) / 2;
       height = Math.round(rows * pitch);
 
@@ -442,9 +441,8 @@ const DataGraphCanvas: React.FC<DataGraphCanvasProps> = ({ language, initialCoun
     const y = e.clientY - rect.top;
     const now = performance.now();
 
+    pointerRef.current = { x, y };
     wavesRef.current.push({ x, y, t: now });
-    setExtraPulses((prev) => prev + 1);
-
     const id = Date.now() + Math.random();
     setBadges((prev) => [...prev, { id, text: '+1 pulse' }]);
     setTimeout(() => {
@@ -452,7 +450,11 @@ const DataGraphCanvas: React.FC<DataGraphCanvasProps> = ({ language, initialCoun
     }, 1150);
   };
 
-  const totalDisplayed = initialCount + extraPulses;
+  const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== 'mouse') {
+      handlePointerLeave();
+    }
+  };
 
   return (
     <div className="relative rounded-2xl border border-white/10 bg-card/70 backdrop-blur-md p-4 md:p-5 shadow-xl">
@@ -468,11 +470,13 @@ const DataGraphCanvas: React.FC<DataGraphCanvasProps> = ({ language, initialCoun
       <div className="flex flex-wrap items-center justify-between gap-2 pb-3 text-xs md:text-sm">
         <div className="flex items-center gap-2">
           <span className="font-mono font-semibold text-sky-400">
-            {totalDisplayed.toLocaleString(language === 'pt' ? 'pt-BR' : 'en-US')}
+            {initialCount === null
+              ? '—'
+              : initialCount.toLocaleString(language === 'pt' ? 'pt-BR' : 'en-US')}
           </span>
           <span className="text-foreground/75">{copy.epochsLabel}</span>
           <span className="hidden md:inline-block text-foreground/40 font-mono text-xs">
-            · {copy.headerTitle}
+            ({copy.headerTitle})
           </span>
         </div>
 
@@ -494,10 +498,12 @@ const DataGraphCanvas: React.FC<DataGraphCanvasProps> = ({ language, initialCoun
         onPointerMove={handlePointerMove}
         onPointerLeave={handlePointerLeave}
         onPointerDown={handlePointerDown}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerLeave}
         role="img"
         aria-label="Bevilaqua Data Labs interactive telemetry matrix"
-        className="relative w-full cursor-pointer select-none overflow-hidden"
-        style={{ height: 240 }}
+        className="relative w-full cursor-pointer select-none touch-pan-y overflow-hidden"
+        style={{ height: 340 }}
       >
         <canvas
           ref={canvasRef}

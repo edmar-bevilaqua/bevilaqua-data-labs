@@ -9,7 +9,7 @@ export const siteContent = {
   pt: {
     brand: 'Bevilaqua Data Labs',
     founder: 'Edmar Junyor Bevilaqua',
-    founderRole: 'Cientista de Dados · Engenheiro de ML & Dados',
+    founderRole: 'Cientista de Dados Sênior, Engenheiro de ML e Dados',
     nav: {
       home: 'Início',
       about: 'Sobre',
@@ -21,23 +21,20 @@ export const siteContent = {
       support: 'Suporte',
     },
     hero: {
-      statusLocation: 'Brasil',
-      statusAvailable: 'Disponível para Projetos & Consultoria',
-      eyebrow: 'Edmar Bevilaqua · Founder & Data Scientist',
       title: 'Bevilaqua Data Labs',
-      roleHighlight: 'Ciência de Dados, ML & Engenharia Aplicada.',
+      roleHighlight: 'Modelagem preditiva, séries temporais e redes em grafos.',
       subtitle:
-        'Soluções em dados, inteligência artificial e software para transformar informação complexa em modelos preditivos, automações e produtos digitais confiáveis.',
+        'Trabalho com modelos preditivos e IA aplicada a diversos domínios, como silvicultura, finanças, saúde e operações.',
       description:
-        'Projetamos pipelines de dados, arquiteturas de Machine Learning / Deep Learning (Séries Temporais, Grafos, Ensemble) e plataformas analíticas com foco em rigor estatístico, impacto de negócio e manutenção sustentável.',
-      primaryCta: 'Explorar Labs & Arquiteturas',
-      secondaryCta: 'Falar com Edmar Bevilaqua',
+        'Desenvolvo modelos de Machine Learning e pipelines de dados em Python e SQL, da preparação dos dados à avaliação.',
+      primaryCta: 'Ver projetos',
+      secondaryCta: 'Entrar em contato',
       graph: {
-        headerTitle: 'Matriz Interativa · Bevilaqua Data Labs',
-        epochsLabel: 'pulsos / commits de telemetria na sessão',
+        headerTitle: 'Matriz Interativa da Bevilaqua Data Labs',
+        epochsLabel: 'contribuições no último ano',
         less: 'Menos',
         more: 'Mais',
-        hint: 'passe o mouse para interagir · clique no painel para disparar um novo pulso',
+        hint: 'Toque ou mova o cursor sobre a matriz para interagir. Toque ou clique para criar uma onda.',
         scrollHint: 'role para explorar ↓',
       },
       stats: {
@@ -45,77 +42,46 @@ export const siteContent = {
         domainsSuffix: '+',
         domainsLabel: 'frentes de engenharia (DS, ML, DE, BI & IA)',
         reposLabel: 'repositórios públicos no GitHub',
-        commitsLabel: 'contribuições e experimentos no último ano',
-        pipelineValue: 100,
-        pipelineSuffix: '%',
-        pipelineLabel: 'foco em pipelines reprodutíveis ponta a ponta',
+        commitsLabel: 'contribuições no último ano',
       },
     },
-    ticker: [
-      {
-        scope: 'feat(aml-gnn)',
-        msg: 'detecção de padrões suspeitos com PyTorch Geometric & Graph Neural Networks',
-      },
-      {
-        scope: 'feat(forecasting)',
-        msg: 'ensemble learning & validação temporal out-of-time para previsão de demanda',
-      },
-      {
-        scope: 'arch(data-ops)',
-        msg: 'pipelines analíticos reprodutíveis com Python, SQL, Airflow e Databricks',
-      },
-      {
-        scope: 'perf(ml-pipeline)',
-        msg: 'feature engineering estruturada, controle de data leakage e tuning de hiperparâmetros',
-      },
-      {
-        scope: 'feat(analytics)',
-        msg: 'indicadores executivos e produtos orientados por dados em Cloud (AWS · Azure · GCP)',
-      },
-    ],
     about: {
-      kicker: '01 / sobre & filosofia de engenharia',
-      telemetryHash: 'lab.core[edmar]',
-      telemetryStep: '01 / 05',
-      telemetryCommit: 'feat(identity): rigor estatístico + visão de produto',
-      title: 'Engenharia de Dados & IA conectada a decisões reais',
+      kicker: '01. Sobre e filosofia de engenharia',
+      title: 'Sobre Edmar',
       founderCard: {
+        label: 'Perfil',
         name: 'Edmar Junyor Bevilaqua',
-        role: 'Founder · Data Scientist & ML Engineer',
-        bio: 'Atuação ponta a ponta unindo modelagem estatística, aprendizado de máquina, engenharia de dados e arquitetura de software para resolver problemas de alta complexidade.',
+        role: 'Cientista de Dados Sênior, Engenheiro de ML',
+        bio: 'Trabalho com modelagem preditiva, séries temporais, grafos e engenharia de dados.',
         badges: ['Ciência de Dados', 'Machine Learning', 'Engenharia de Dados', 'GNNs & Time Series', 'Analytics & BI'],
       },
       paragraphs: [
-        'A Bevilaqua Data Labs é uma iniciativa e consultoria técnica especializada em transformar dados brutos em soluções práticas de alto impacto. Combinamos ciência de dados, machine learning, business intelligence e engenharia de dados para apoiar decisões críticas, automações e produtos digitais.',
-        'Nosso trabalho une rigor matemático e estatístico, visão de produto e entendimento profundo das regras de negócio para entregar arquiteturas compreensíveis, auditáveis e preparadas para evolução contínua em produção.',
-        'Fundada e liderada tecnicamente por Edmar Junyor Bevilaqua, profissional com atuação direta em projetos de ciência de dados, modelagem preditiva, redes neurais em grafos, séries temporais e engenharia analítica.',
+        'Sou Edmar Bevilaqua. Criei a Bevilaqua Data Labs para reunir meus projetos e estudos em Ciência de Dados, Engenharia de Dados e Machine Learning.',
+        'Neste portfólio, apresento trabalhos com redes transacionais, previsão de demanda e análise de dados.',
       ],
       principles: [
         {
           code: 'P-01',
-          title: 'Dados aplicados ao negócio',
+          title: 'Definir o problema antes do modelo',
           description:
-            'Priorizamos problemas reais, métricas acionáveis e entregas diretamente conectadas à redução de risco, eficiência operacional e geração de receita.',
+            'Especifico o que precisa ser previsto ou classificado e como o resultado será avaliado antes de escolher uma técnica.',
         },
         {
           code: 'P-02',
-          title: 'Modelos e automações confiáveis',
+          title: 'Respeitar a ordem do tempo',
           description:
-            'Construímos soluções analíticas com validação temporal rigorosa, prevenção de data leakage, rastreabilidade de experimentos e clareza operacional.',
+            'Em séries temporais, separo treino e avaliação por período para medir o desempenho em datas futuras.',
         },
         {
           code: 'P-03',
-          title: 'Engenharia sustentável de ponta a ponta',
+          title: 'Deixar as etapas claras',
           description:
-            'Do dado bruto ao deploy: pensamos em modularidade de código, documentação técnica, observabilidade e manutenção desde as primeiras decisões.',
+            'Organizo preparação dos dados, modelagem e avaliação em etapas que possam ser revisadas.',
         },
       ],
     },
     services: {
-      kicker: '02 / stack & capacidades técnicas',
-      telemetryHash: 'stack.matrix[v4]',
-      telemetryStep: '02 / 05',
-      telemetryCommit: 'feat(stack): python, pytorch, cloud & data pipelines',
+      kicker: '02. Stack e capacidades técnicas',
       title: 'Ecossistema Técnico & Frentes de Atuação',
       intro:
         'Estruturamos nossa stack em camadas complementares do ciclo de vida de dados e IA — da ingestão e orquestração até a modelagem avançada e entrega em produção.',
@@ -124,7 +90,7 @@ export const siteContent = {
         'Selecionamos ferramentas conforme a complexidade estatística, o volume de dados e a maturidade operacional de cada ambiente.',
       stackLayers: [
         {
-          layer: 'Camada 01 · Modelagem & IA',
+          layer: 'Camada 01: Modelagem e IA',
           title: 'Data Science, ML & Deep Learning',
           description:
             'Modelagem supervisionada, não-supervisionada, séries temporais e redes neurais em grafos com validação estatística rigorosa.',
@@ -141,7 +107,7 @@ export const siteContent = {
           ],
         },
         {
-          layer: 'Camada 02 · Pipelines & Plataforma',
+          layer: 'Camada 02: Pipelines e Plataforma',
           title: 'Engenharia de Dados & Orquestração',
           description:
             'Ingestão, saneamento, modelagem dimensional, feature stores e automação de fluxos analíticos escaláveis.',
@@ -156,7 +122,7 @@ export const siteContent = {
           ],
         },
         {
-          layer: 'Camada 03 · Cloud & MLOps',
+          layer: 'Camada 03: Cloud e MLOps',
           title: 'Infraestrutura Cloud & Reprodutibilidade',
           description:
             'Ambientes conteinerizados, versionamento de código/dados e deploy sustentável nas principais nuvens públicas.',
@@ -171,7 +137,7 @@ export const siteContent = {
           ],
         },
         {
-          layer: 'Camada 04 · Decisão & Produtos',
+          layer: 'Camada 04: Decisão e Produtos',
           title: 'Analytics, BI & Data Products',
           description:
             'Tradução de modelos e indicadores complexos em painéis executivos e aplicações web interativas.',
@@ -215,10 +181,7 @@ export const siteContent = {
       ],
     },
     solutions: {
-      kicker: '03 / labs, cases técnicos & arquiteturas',
-      telemetryHash: 'labs.build[3]',
-      telemetryStep: '03 / 05',
-      telemetryCommit: 'feat(labs): arquiteturas ponta a ponta documentadas',
+      kicker: '03. Labs, cases técnicos e arquiteturas',
       title: 'Labs & Estudos de Engenharia Aplicada',
       intro:
         'Explore a arquitetura interna de cada projeto: selecione um estudo abaixo para inspecionar o pipeline de transformação de dados, especificações de modelagem e decisões técnicas.',
@@ -231,7 +194,7 @@ export const siteContent = {
         {
           id: 'aml-gnn',
           repoName: 'anti-money-laundering-project',
-          domain: 'Deep Learning · Graph Neural Networks · Risco Financeiro',
+          domain: 'Deep Learning, Graph Neural Networks e risco financeiro',
           title: 'Detecção de Padrões em Redes Transacionais (Anti-Money Laundering)',
           description:
             'Aplicação de Redes Neurais em Grafos (GNNs) com PyTorch Geometric para identificar esquemas complexos de lavagem de dinheiro em transações financeiras sintéticas, capturando relações topológicas entre contas e fluxos.',
@@ -258,7 +221,7 @@ export const siteContent = {
         {
           id: 'demand-forecast',
           repoName: 'store-sales-tsf-kaggle-competition',
-          domain: 'Séries Temporais · Ensemble Learning · Varejo',
+          domain: 'Séries temporais, Ensemble Learning e varejo',
           title: 'Previsão de Demanda Multi-Loja e Séries Temporais',
           description:
             'Sistema preditivo baseado em Ensemble Learning para previsão de vendas no varejo, integrando variáveis exógenas (feriados, preço do petróleo, promoções), engenharia de atributos temporais e validação rigorosa.',
@@ -285,7 +248,7 @@ export const siteContent = {
         {
           id: 'ds-lab',
           repoName: 'data_science',
-          domain: 'Ciência de Dados · Machine Learning · Experimentação',
+          domain: 'Ciência de Dados, Machine Learning e experimentação',
           title: 'Laboratório de Ciência de Dados & Modelagem Preditiva',
           description:
             'Acervo estruturado de estudos técnicos cobrindo limpeza estatística, análise exploratória (EDA), engenharia de atributos, algoritmos clássicos de aprendizado de máquina, deep learning e visualização avançada.',
@@ -297,7 +260,7 @@ export const siteContent = {
             'Avaliação & Interpretabilidade',
           ],
           metrics: [
-            { label: 'Cobertura', value: 'EDA · ML Clássico · Deep Learning' },
+            { label: 'Cobertura', value: 'EDA, ML Clássico e Deep Learning' },
             { label: 'Padronização', value: 'Notebooks Reprodutíveis' },
             { label: 'Objetivo', value: 'Benchmarks & Boas Práticas' },
           ],
@@ -312,15 +275,14 @@ export const siteContent = {
       ],
     },
     github: {
-      kicker: '04 / atividade no github & código aberto',
-      telemetryHash: 'gh.sync[live]',
-      telemetryStep: '04 / 05',
+      kicker: '04. Atividade no GitHub e código aberto',
       title: 'Telemetria & Repositórios no GitHub',
       subtitle:
         'Acompanhamento em tempo real dos repositórios públicos, estudos de código aberto e consistência de contribuições em github.com/edmar-bevilaqua.',
-      statusLive: 'sincronizado · API do GitHub',
-      statusFallback: 'telemetria local · cache resiliente',
+      statusLive: 'Sincronizado com a API do GitHub',
+      statusFallback: 'API do GitHub indisponível',
       statusLoading: 'sincronizando com o GitHub…',
+      contributionsUnavailable: 'Dados de contribuições indisponíveis.',
       totalLabel: 'contribuições no último ano',
       activeDaysLabel: 'dias ativos',
       currentStreakLabel: 'sequência atual (dias)',
@@ -334,15 +296,12 @@ export const siteContent = {
       contributionPlural: 'contribuições',
     },
     contact: {
-      kicker: '05 / contato & novos projetos',
-      telemetryHash: 'merge.request[open]',
-      telemetryStep: '05 / 05',
-      telemetryCommit: 'feat(contact): pronto para novos desafios e parcerias',
-      title: 'Vamos conversar sobre Dados, IA ou um Projeto?',
+      kicker: '05. Contato e novos projetos',
+      title: 'Contato',
       intro:
-        'Entre em contato para discutir oportunidades técnicas, projetos de consultoria, desenvolvimento de modelos preditivos ou parcerias estratégicas.',
+        'Para falar sobre projetos de Ciência de Dados, Engenharia de Dados ou oportunidades profissionais, escreva para mim por email, LinkedIn ou pelo formulário.',
       emailLabel: 'Email Direto',
-      availability: 'Atendimento para recrutamento técnico, projetos ponta a ponta e demandas institucionais.',
+      availability: 'Use o formulário para enviar uma mensagem diretamente para meu email.',
       directChannelsLabel: 'Canais Diretos & Redes Técnicas',
       form: {
         name: 'Nome',
@@ -413,7 +372,7 @@ export const siteContent = {
   en: {
     brand: 'Bevilaqua Data Labs',
     founder: 'Edmar Junyor Bevilaqua',
-    founderRole: 'Data Scientist · ML & Data Engineer',
+    founderRole: 'Senior Data Scientist, ML and Data Engineer',
     nav: {
       home: 'Home',
       about: 'About',
@@ -425,23 +384,20 @@ export const siteContent = {
       support: 'Support',
     },
     hero: {
-      statusLocation: 'Brazil',
-      statusAvailable: 'Available for Projects & Technical Consulting',
-      eyebrow: 'Edmar Bevilaqua · Founder & Data Scientist',
       title: 'Bevilaqua Data Labs',
-      roleHighlight: 'Applied Data Science, ML & Data Engineering.',
+      roleHighlight: 'Predictive modeling, time series and graph learning.',
       subtitle:
-        'Data, artificial intelligence and software solutions that turn complex information into predictive models, automation and reliable digital products.',
+        'I build predictive models for a variety of domains, including forestry, finance, healthcare, and operations.',
       description:
-        'We design end-to-end data pipelines, Machine Learning / Deep Learning architectures (Time Series, Graph Neural Networks, Ensembles) and analytical platforms focused on statistical rigor, business impact and sustainable engineering.',
-      primaryCta: 'Explore Labs & Architectures',
-      secondaryCta: 'Talk to Edmar Bevilaqua',
+        'I develop machine learning models and data pipelines in Python and SQL, from data preparation through evaluation.',
+      primaryCta: 'View projects',
+      secondaryCta: 'Get in touch',
       graph: {
-        headerTitle: 'Interactive Matrix · Bevilaqua Data Labs',
-        epochsLabel: 'telemetry pulses / commits in session',
+        headerTitle: 'Interactive Matrix for Bevilaqua Data Labs',
+        epochsLabel: 'contributions in the last year',
         less: 'Less',
         more: 'More',
-        hint: 'hover to interact · click the board to trigger a new telemetry pulse',
+        hint: 'Touch or move the cursor over the matrix to interact. Tap or click to create a wave.',
         scrollHint: 'scroll to explore ↓',
       },
       stats: {
@@ -449,77 +405,46 @@ export const siteContent = {
         domainsSuffix: '+',
         domainsLabel: 'core engineering domains (DS, ML, DE, BI & AI)',
         reposLabel: 'public repositories on GitHub',
-        commitsLabel: 'contributions & experiments in the last year',
-        pipelineValue: 100,
-        pipelineSuffix: '%',
-        pipelineLabel: 'focus on reproducible end-to-end pipelines',
+        commitsLabel: 'contributions in the last year',
       },
     },
-    ticker: [
-      {
-        scope: 'feat(aml-gnn)',
-        msg: 'suspicious transaction pattern detection with PyTorch Geometric & Graph Neural Networks',
-      },
-      {
-        scope: 'feat(forecasting)',
-        msg: 'ensemble learning & strict out-of-time validation for retail demand forecasting',
-      },
-      {
-        scope: 'arch(data-ops)',
-        msg: 'reproducible analytical pipelines with Python, SQL, Airflow and Databricks',
-      },
-      {
-        scope: 'perf(ml-pipeline)',
-        msg: 'structured feature engineering, data leakage prevention & hyperparameter tuning',
-      },
-      {
-        scope: 'feat(analytics)',
-        msg: 'executive KPIs and data-driven products in Cloud environments (AWS · Azure · GCP)',
-      },
-    ],
     about: {
-      kicker: '01 / about & engineering philosophy',
-      telemetryHash: 'lab.core[edmar]',
-      telemetryStep: '01 / 05',
-      telemetryCommit: 'feat(identity): statistical rigor + product mindset',
-      title: 'Data & AI Engineering connected to real decisions',
+      kicker: '01. About and engineering philosophy',
+      title: 'About Edmar',
       founderCard: {
+        label: 'Profile',
         name: 'Edmar Junyor Bevilaqua',
-        role: 'Founder · Data Scientist & ML Engineer',
-        bio: 'End-to-end execution combining statistical modeling, machine learning, data engineering and software architecture to solve high-complexity problems.',
+        role: 'Senior Data Scientist, ML Engineer',
+        bio: 'I work with predictive modeling, time series, graphs and data engineering.',
         badges: ['Data Science', 'Machine Learning', 'Data Engineering', 'GNNs & Time Series', 'Analytics & BI'],
       },
       paragraphs: [
-        'Bevilaqua Data Labs is a technical practice and consultancy specialized in turning raw data into high-impact business solutions. We combine data science, machine learning, business intelligence and data engineering to power critical decisions, automation and digital products.',
-        'Our work connects mathematical and statistical rigor, product thinking and deep domain understanding to deliver architectures that are explainable, auditable and built to evolve in production.',
-        'Founded and technically led by Edmar Junyor Bevilaqua, a practitioner working across data science, predictive modeling, graph neural networks, time-series forecasting and analytical engineering.',
+        'I’m Edmar Bevilaqua. I created Bevilaqua Data Labs to bring together my projects and studies in data science, data engineering and machine learning.',
+        'This portfolio includes work on transaction networks, demand forecasting and data analysis.',
       ],
       principles: [
         {
           code: 'P-01',
-          title: 'Data applied to business outcomes',
+          title: 'Define the problem before the model',
           description:
-            'We prioritize real-world bottlenecks, actionable metrics and deliverables directly tied to risk reduction, operational efficiency and revenue.',
+            'I specify what needs to be predicted or classified and how the result will be evaluated before choosing a technique.',
         },
         {
           code: 'P-02',
-          title: 'Reliable models and automation',
+          title: 'Respect the order of time',
           description:
-            'We build analytical systems with strict temporal validation, leakage prevention, experiment traceability and operational clarity.',
+            'For time-series projects, I split training and evaluation by time period to measure performance on future dates.',
         },
         {
           code: 'P-03',
-          title: 'Sustainable end-to-end engineering',
+          title: 'Make the steps clear',
           description:
-            'From raw ingestion to deployment: we design for modularity, clean documentation, observability and maintainability from day one.',
+            'I organize data preparation, modeling and evaluation into steps that can be reviewed.',
         },
       ],
     },
     services: {
-      kicker: '02 / tech stack & capabilities',
-      telemetryHash: 'stack.matrix[v4]',
-      telemetryStep: '02 / 05',
-      telemetryCommit: 'feat(stack): python, pytorch, cloud & data pipelines',
+      kicker: '02. Tech stack and capabilities',
       title: 'Technical Ecosystem & Core Capabilities',
       intro:
         'Our stack is organized across complementary layers of the Data & AI lifecycle — from ingestion and orchestration to advanced modeling and production delivery.',
@@ -528,7 +453,7 @@ export const siteContent = {
         'We select tools based on statistical complexity, data volume and the operational maturity of each project.',
       stackLayers: [
         {
-          layer: 'Layer 01 · Modeling & AI',
+          layer: 'Layer 01: Modeling and AI',
           title: 'Data Science, ML & Deep Learning',
           description:
             'Supervised and unsupervised learning, time-series forecasting and graph neural networks backed by rigorous validation.',
@@ -545,7 +470,7 @@ export const siteContent = {
           ],
         },
         {
-          layer: 'Layer 02 · Pipelines & Platform',
+          layer: 'Layer 02: Pipelines and Platform',
           title: 'Data Engineering & Orchestration',
           description:
             'Ingestion, data cleansing, dimensional modeling, feature pipelines and scalable workflow automation.',
@@ -560,7 +485,7 @@ export const siteContent = {
           ],
         },
         {
-          layer: 'Layer 03 · Cloud & MLOps',
+          layer: 'Layer 03: Cloud and MLOps',
           title: 'Cloud Infrastructure & Reproducibility',
           description:
             'Containerized environments, code/data versioning and reliable deployment across major cloud providers.',
@@ -575,7 +500,7 @@ export const siteContent = {
           ],
         },
         {
-          layer: 'Layer 04 · Decision & Products',
+          layer: 'Layer 04: Decision and Products',
           title: 'Analytics, BI & Data Products',
           description:
             'Translating complex models and metrics into executive dashboards and interactive web applications.',
@@ -619,10 +544,7 @@ export const siteContent = {
       ],
     },
     solutions: {
-      kicker: '03 / labs, case studies & architectures',
-      telemetryHash: 'labs.build[3]',
-      telemetryStep: '03 / 05',
-      telemetryCommit: 'feat(labs): documented end-to-end ML architectures',
+      kicker: '03. Labs, case studies, and architectures',
       title: 'Labs & Applied Engineering Studies',
       intro:
         'Explore the internal engineering of each project: select a study below to inspect the data transformation pipeline, modeling specifications and technical decisions.',
@@ -635,7 +557,7 @@ export const siteContent = {
         {
           id: 'aml-gnn',
           repoName: 'anti-money-laundering-project',
-          domain: 'Deep Learning · Graph Neural Networks · Financial Risk',
+          domain: 'Deep Learning, Graph Neural Networks and financial risk',
           title: 'Pattern Detection in Transactional Networks (Anti-Money Laundering)',
           description:
             'Graph Neural Network (GNN) application built with PyTorch Geometric to detect suspicious money-laundering patterns in synthetic financial transactions by capturing topological relationships across accounts and flows.',
@@ -662,7 +584,7 @@ export const siteContent = {
         {
           id: 'demand-forecast',
           repoName: 'store-sales-tsf-kaggle-competition',
-          domain: 'Time Series · Ensemble Learning · Retail',
+          domain: 'Time series, Ensemble Learning and retail',
           title: 'Multi-Store Demand Forecasting & Time Series',
           description:
             'Predictive system based on Ensemble Learning for retail sales demand, integrating exogenous signals (holidays, oil prices, promotions), temporal feature engineering and strict out-of-time validation.',
@@ -689,7 +611,7 @@ export const siteContent = {
         {
           id: 'ds-lab',
           repoName: 'data_science',
-          domain: 'Data Science · Machine Learning · Experimentation',
+          domain: 'Data Science, Machine Learning and experimentation',
           title: 'Data Science & Predictive Modeling Laboratory',
           description:
             'Curated repository of technical studies covering statistical data cleaning, exploratory data analysis (EDA), feature engineering, classical machine learning, deep learning and analytical visualization.',
@@ -701,7 +623,7 @@ export const siteContent = {
             'Evaluation & Interpretability',
           ],
           metrics: [
-            { label: 'Coverage', value: 'EDA · Classical ML · Deep Learning' },
+            { label: 'Coverage', value: 'EDA, Classical ML and Deep Learning' },
             { label: 'Standard', value: 'Reproducible Notebooks' },
             { label: 'Goal', value: 'Benchmarks & Best Practices' },
           ],
@@ -716,15 +638,14 @@ export const siteContent = {
       ],
     },
     github: {
-      kicker: '04 / github activity & open source',
-      telemetryHash: 'gh.sync[live]',
-      telemetryStep: '04 / 05',
+      kicker: '04. GitHub activity and open source',
       title: 'GitHub Telemetry & Repositories',
       subtitle:
         'Live tracking of public repositories, open-source studies and contribution consistency on github.com/edmar-bevilaqua.',
-      statusLive: 'live data · GitHub API',
-      statusFallback: 'local telemetry · resilient cache',
+      statusLive: 'Live data from GitHub API',
+      statusFallback: 'GitHub API unavailable',
       statusLoading: 'syncing with GitHub…',
+      contributionsUnavailable: 'Contribution data is unavailable.',
       totalLabel: 'contributions in the last year',
       activeDaysLabel: 'active days',
       currentStreakLabel: 'current streak (days)',
@@ -738,15 +659,12 @@ export const siteContent = {
       contributionPlural: 'contributions',
     },
     contact: {
-      kicker: '05 / contact & collaboration',
-      telemetryHash: 'merge.request[open]',
-      telemetryStep: '05 / 05',
-      telemetryCommit: 'feat(contact): open to technical roles, projects & consulting',
-      title: 'Let’s talk about Data, AI or a Project?',
+      kicker: '05. Contact and collaboration',
+      title: 'Contact',
       intro:
-        'Get in touch to discuss technical roles, consulting projects, predictive modeling challenges or strategic partnerships.',
+        'For data science, data engineering or career opportunities, reach me by email, LinkedIn or the form.',
       emailLabel: 'Direct Email',
-      availability: 'Available for technical leadership/roles, end-to-end projects and consulting requests.',
+      availability: 'Use the form to send a message directly to my email.',
       directChannelsLabel: 'Direct Channels & Technical Profiles',
       form: {
         name: 'Name',

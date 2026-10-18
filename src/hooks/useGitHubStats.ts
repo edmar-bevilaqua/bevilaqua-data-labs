@@ -35,108 +35,15 @@ export interface ContributionCalendar {
 
 export interface GitHubTelemetryState {
   status: 'loading' | 'live' | 'fallback';
-  publicRepos: number;
+  publicRepos: number | null;
   repos: GitHubRepo[];
-  calendar: ContributionCalendar;
+  calendar: ContributionCalendar | null;
 }
-
-const FALLBACK_REPOS: GitHubRepo[] = [
-  {
-    name: 'anti-money-laundering-project',
-    url: 'https://github.com/edmar-bevilaqua/anti-money-laundering-project',
-    desc: 'Graph Neural Networks (PyTorch Geometric) applied to detect suspicious patterns in synthetic financial transaction networks.',
-    lang: 'Jupyter Notebook',
-    stars: 1,
-    fork: false,
-    archived: false,
-    pushed: '2026-08-15T12:00:00Z',
-    homepage: null,
-  },
-  {
-    name: 'store-sales-tsf-kaggle-competition',
-    url: 'https://github.com/edmar-bevilaqua/store-sales-tsf-kaggle-competition',
-    desc: 'Ensemble learning and feature engineering pipeline for multi-store retail demand time-series forecasting.',
-    lang: 'Jupyter Notebook',
-    stars: 1,
-    fork: false,
-    archived: false,
-    pushed: '2026-07-20T12:00:00Z',
-    homepage: null,
-  },
-  {
-    name: 'data_science',
-    url: 'https://github.com/edmar-bevilaqua/data_science',
-    desc: 'Collection of data science, machine learning, deep learning, statistical analysis and visualization studies.',
-    lang: 'Python',
-    stars: 2,
-    fork: false,
-    archived: false,
-    pushed: '2026-09-10T12:00:00Z',
-    homepage: null,
-  },
-  {
-    name: 'bevilaqua-data-labs',
-    url: 'https://github.com/edmar-bevilaqua/bevilaqua-data-labs',
-    desc: 'Bevilaqua Data Labs technical portfolio and applied Data Science & AI engineering showcase.',
-    lang: 'TypeScript',
-    stars: 1,
-    fork: false,
-    archived: false,
-    pushed: new Date().toISOString(),
-    homepage: 'https://edmar-bevilaqua.github.io/bevilaqua-data-labs/',
-  },
-];
 
 function formatIsoDate(d: Date): string {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(
     d.getDate()
   ).padStart(2, '0')}`;
-}
-
-function generateDeterministicCalendar(): ContributionCalendar {
-  const today = new Date();
-  const raw: ContributionCell[] = [];
-  let seed = 421337;
-  const rand = () => {
-    seed = (seed * 1664525 + 1013904223) % 4294967296;
-    return seed / 4294967296;
-  };
-
-  for (let i = 365; i >= 0; i--) {
-    const d = new Date(today);
-    d.setDate(today.getDate() - i);
-    const dayOfWeek = d.getDay();
-    const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
-    const r = rand();
-    const activeProb = isWeekend ? 0.35 : 0.68;
-    let count = 0;
-    let level: 0 | 1 | 2 | 3 | 4 = 0;
-
-    if (r < activeProb) {
-      const intensity = rand();
-      if (intensity < 0.4) {
-        count = 1 + Math.floor(rand() * 2);
-        level = 1;
-      } else if (intensity < 0.72) {
-        count = 3 + Math.floor(rand() * 3);
-        level = 2;
-      } else if (intensity < 0.92) {
-        count = 6 + Math.floor(rand() * 5);
-        level = 3;
-      } else {
-        count = 11 + Math.floor(rand() * 8);
-        level = 4;
-      }
-    }
-
-    raw.push({
-      date: formatIsoDate(d),
-      count,
-      level,
-    });
-  }
-
-  return buildCalendarMetrics(raw, today);
 }
 
 function buildCalendarMetrics(
@@ -235,9 +142,9 @@ async function fetchCached<T>(key: string, fetcher: () => Promise<T>): Promise<T
 export function useGitHubStats(): GitHubTelemetryState {
   const [state, setState] = useState<GitHubTelemetryState>(() => ({
     status: 'loading',
-    publicRepos: FALLBACK_REPOS.length,
-    repos: FALLBACK_REPOS,
-    calendar: generateDeterministicCalendar(),
+    publicRepos: null,
+    repos: [],
+    calendar: null,
   }));
 
   useEffect(() => {
@@ -305,22 +212,19 @@ export function useGitHubStats(): GitHubTelemetryState {
           ? calRes.value
           : null;
 
-      const calendar = liveCalRaw
-        ? buildCalendarMetrics(liveCalRaw)
-        : generateDeterministicCalendar();
+      const calendar = liveCalRaw ? buildCalendarMetrics(liveCalRaw) : null;
 
-      const repos = liveRepos || FALLBACK_REPOS;
       const publicRepos =
-        typeof profile?.public_repos === 'number' && profile.public_repos > 0
+        typeof profile?.public_repos === 'number'
           ? profile.public_repos
-          : repos.filter((r) => !r.fork).length;
+          : null;
 
       const isLive = Boolean(profile || liveRepos || liveCalRaw);
 
       setState({
         status: isLive ? 'live' : 'fallback',
         publicRepos,
-        repos,
+        repos: liveRepos ?? [],
         calendar,
       });
     }

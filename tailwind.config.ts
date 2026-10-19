@@ -20,6 +20,11 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				sans: ['"Instrument Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+				display: ['"Schibsted Grotesk"', '"Instrument Sans"', 'sans-serif'],
+				mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',

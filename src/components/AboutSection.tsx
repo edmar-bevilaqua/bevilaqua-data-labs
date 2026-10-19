@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ShieldCheck, Cpu, LineChart } from 'lucide-react';
 import { SiGithub, SiGmail, SiInstagram, SiLinkedin } from 'react-icons/si';
 import { Language, siteContent } from '@/content/siteContent';
@@ -19,6 +19,7 @@ const AboutSection = ({
   isNodeCurrent = false,
 }: AboutSectionProps) => {
   const copy = siteContent[language].about;
+  const [portraitUnavailable, setPortraitUnavailable] = useState(false);
 
   const handlePointerMove = (e: React.PointerEvent<HTMLElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -59,15 +60,33 @@ const AboutSection = ({
                 </div>
               </div>
 
-              <img
-                src="/edmar-pixel-art.png"
-                alt={
-                  language === 'pt'
-                    ? 'Retrato de Edmar Bevilaqua em pixel art'
-                    : 'Pixel-art portrait of Edmar Bevilaqua'
-                }
-                className="mx-auto h-64 w-full object-contain object-bottom sm:h-72"
-              />
+              {portraitUnavailable ? (
+                <div
+                  role="img"
+                  aria-label={
+                    language === 'pt'
+                      ? 'Retrato de Edmar Bevilaqua indisponível'
+                      : 'Edmar Bevilaqua portrait unavailable'
+                  }
+                  className="mx-auto flex h-64 w-full flex-col items-center justify-center gap-3 text-foreground/45 sm:h-72"
+                >
+                  <BeviMark size={64} />
+                  <span className="text-xs">
+                    {language === 'pt' ? 'Retrato indisponível' : 'Portrait unavailable'}
+                  </span>
+                </div>
+              ) : (
+                <img
+                  src={`${import.meta.env.BASE_URL}edmar-pixel-art.png`}
+                  alt={
+                    language === 'pt'
+                      ? 'Retrato de Edmar Bevilaqua em pixel art'
+                      : 'Pixel-art portrait of Edmar Bevilaqua'
+                  }
+                  onError={() => setPortraitUnavailable(true)}
+                  className="mx-auto h-64 w-full object-contain object-bottom sm:h-72"
+                />
+              )}
 
               <p className="text-sm text-foreground/75 leading-relaxed">
                 {copy.founderCard.bio}

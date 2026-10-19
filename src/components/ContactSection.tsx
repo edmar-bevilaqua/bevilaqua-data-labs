@@ -21,7 +21,7 @@ interface ContactSectionProps {
   isNodeCurrent?: boolean;
 }
 
-const CONTACT_EMAIL = 'edmar.bevi@gmail.com';
+const CONTACT_EMAIL = 'edmar.bevilaqua@bevilaquadatalabs.com';
 
 const ContactSection = ({
   language,

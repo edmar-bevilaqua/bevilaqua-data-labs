@@ -1,8 +1,7 @@
-
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Language, languages, siteContent } from '@/content/siteContent';
-import { useScrollToSection } from '@/hooks/useScrollToSection';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
+import { Language, siteContent } from '@/content/siteContent';
 import BeviMark from './BeviMark';
 
 interface NavbarProps {
@@ -10,152 +9,180 @@ interface NavbarProps {
   setLanguage: (language: Language) => void;
 }
 
+const SECTION_IDS = ['about', 'services', 'solutions', 'github', 'contact'] as const;
+
 const Navbar = ({ language, setLanguage }: NavbarProps) => {
   const copy = siteContent[language];
-  const scrollToSection = useScrollToSection();
+  const navigate = useNavigate();
   const location = useLocation();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeSection, setActiveSection] = useState<string>('');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    setIsMenuOpen(false);
+    const handleScroll = () => {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(docHeight > 0 ? Math.min(1, Math.max(0, window.scrollY / docHeight)) : 0);
+
+      if (location.pathname !== '/') {
+        setActiveSection('');
+        return;
+      }
+
+      let current = '';
+      for (const id of SECTION_IDS) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= window.innerHeight * 0.45) {
+            current = id;
+          }
+        }
+      }
+      setActiveSection(current);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [location.pathname]);
 
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setIsMenuOpen(false);
-    };
-    document.addEventListener('keydown', onKeyDown);
-    return () => document.removeEventListener('keydown', onKeyDown);
-  }, []);
+  const scrollToSection = (sectionId: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    const section = document.getElementById(sectionId);
 
-  const anchorLinks = [
+    if (section && location.pathname === '/') {
+      window.scrollTo({
+        top: section.offsetTop - 72,
+        behavior: 'smooth',
+      });
+    } else {
+      navigate('/');
+      window.setTimeout(() => {
+        const target = document.getElementById(sectionId);
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 72,
+            behavior: 'smooth',
+          });
+        }
+      }, 120);
+    }
+  };
+
+  const navLinks = [
     { id: 'about', label: copy.nav.about },
     { id: 'services', label: copy.nav.services },
     { id: 'solutions', label: copy.nav.solutions },
+    { id: 'github', label: copy.nav.github },
     { id: 'contact', label: copy.nav.contact },
   ];
 
-  const routeLinks = [
-    { to: '/privacy', label: copy.nav.privacy },
-    { to: '/support', label: copy.nav.support },
-  ];
-
-  const linkClasses =
-    'text-sm text-foreground/70 hover:text-foreground transition-colors';
-
   return (
     <>
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-accent-foreground"
-      >
-        {language === 'pt' ? 'Pular para o conteúdo' : 'Skip to content'}
-      </a>
+      {/* Top Reading Progress Bar */}
+      <div
+        aria-hidden="true"
+        className="fixed left-0 top-0 z-[60] h-[2px] w-full origin-left bg-gradient-to-r from-sky-400 via-cyan-300 to-emerald-400 transition-transform duration-75"
+        style={{ transform: `scaleX(${scrollProgress})` }}
+      />
 
-      <header className="fixed top-0 z-50 w-full border-b border-border bg-background/90 backdrop-blur-md">
-        <nav className="flex h-16 items-center justify-between px-6 md:px-12 lg:px-24">
-          <Link to="/" className="flex items-center gap-3">
-            <BeviMark size={30} />
-            <span className="flex flex-col leading-none">
-              <span className="font-display text-sm font-bold tracking-[0.08em] text-foreground">
-                BEVILAQUA
-              </span>
-              <span className="mt-1 font-display text-[10px] font-medium tracking-[0.22em] text-accent">
-                DATA LABS
-              </span>
+      <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-background/85 backdrop-blur-md">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3.5 md:px-12">
+          {/* Brand Logo with BeviMark Droplet Node Mesh */}
+          <Link
+            to="/"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="group flex items-center gap-3 font-display text-base font-bold tracking-tight text-foreground"
+          >
+            <span className="transition-transform duration-300 group-hover:scale-110 drop-shadow-[0_0_8px_rgba(34,228,245,0.35)]">
+              <BeviMark size={26} />
             </span>
+            <span className="gradient-text font-extrabold">{copy.brand}</span>
           </Link>
 
-          <div className="hidden items-center gap-8 lg:flex">
-            {anchorLinks.map((link) => (
-              <a
-                key={link.id}
-                href={`#${link.id}`}
-                onClick={scrollToSection(link.id)}
-                className={linkClasses}
-              >
-                {link.label}
-              </a>
-            ))}
-            {routeLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                aria-current={location.pathname === link.to ? 'page' : undefined}
-                className={linkClasses}
-              >
-                {link.label}
-              </Link>
-            ))}
+          {/* Desktop Navigation */}
+          <nav aria-label="Primary" className="hidden lg:flex items-center gap-1">
+            {navLinks.map((item) => {
+              const isCurrent = activeSection === item.id && location.pathname === '/';
+              return (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  aria-current={isCurrent ? 'true' : 'false'}
+                  onClick={scrollToSection(item.id)}
+                  className={`relative rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
+                    isCurrent ? 'text-foreground' : 'text-foreground/65 hover:text-foreground'
+                  }`}
+                >
+                  {item.label}
+                  <span
+                    className={`absolute bottom-0.5 left-3 right-3 h-[2px] origin-left rounded-full bg-sky-400 transition-transform duration-300 ${
+                      isCurrent ? 'scale-x-100' : 'scale-x-0'
+                    }`}
+                  />
+                </a>
+              );
+            })}
+          </nav>
+
+          {/* Language Switcher & Mobile Menu Button */}
+          <div className="flex items-center gap-2.5">
+            <div
+              role="group"
+              aria-label="Language"
+              className="flex items-center rounded-lg border border-white/15 bg-background/70 p-0.5"
+            >
+              {(['pt', 'en'] as Language[]).map((lang) => {
+                const active = language === lang;
+                return (
+                  <button
+                    key={lang}
+                    type="button"
+                    aria-pressed={active}
+                    onClick={() => setLanguage(lang)}
+                    className={`rounded-md px-2.5 py-1 font-mono text-xs font-semibold transition-all ${
+                      active
+                        ? 'bg-secondary text-sky-300 shadow-sm ring-1 ring-white/15'
+                        : 'text-foreground/55 hover:text-foreground'
+                    }`}
+                  >
+                    {lang.toUpperCase()}
+                  </button>
+                );
+              })}
+            </div>
+
             <button
               type="button"
-              onClick={() => setLanguage(language === 'pt' ? 'en' : 'pt')}
-              className="rounded-md border border-border px-3 py-1 font-mono text-xs text-foreground/70 transition-colors hover:border-foreground hover:bg-accent/10 hover:text-foreground"
-              aria-label="Change language"
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+              aria-label="Toggle menu"
+              className="inline-flex lg:hidden items-center justify-center rounded-lg border border-white/15 p-2 text-foreground/80 hover:bg-white/10"
             >
-              {languages[language]}
+              {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </button>
           </div>
-
-          <button
-            type="button"
-            className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 lg:hidden"
-            aria-expanded={isMenuOpen}
-            aria-controls="mobile-nav-panel"
-            aria-label={isMenuOpen ? (language === 'pt' ? 'Fechar menu' : 'Close menu') : (language === 'pt' ? 'Abrir menu' : 'Open menu')}
-            onClick={() => setIsMenuOpen((open) => !open)}
-          >
-            <span
-              className={`block h-px w-6 bg-foreground transition-transform ${isMenuOpen ? 'translate-y-[3px] rotate-45' : ''}`}
-            />
-            <span
-              className={`block h-px w-6 bg-foreground transition-opacity ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}
-            />
-            <span
-              className={`block h-px w-6 bg-foreground transition-transform ${isMenuOpen ? '-translate-y-[3px] -rotate-45' : ''}`}
-            />
-          </button>
-        </nav>
-      </header>
-
-      {isMenuOpen && (
-        <div
-          id="mobile-nav-panel"
-          className="fixed inset-x-0 top-16 bottom-0 z-50 overflow-y-auto border-t border-border bg-background px-6 py-6 lg:hidden"
-        >
-          <ul className="flex flex-col gap-4">
-            {anchorLinks.map((link) => (
-              <li key={link.id}>
-                <a
-                  href={`#${link.id}`}
-                  onClick={scrollToSection(link.id)}
-                  className="block text-base text-foreground/80 hover:text-foreground"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-            {routeLinks.map((link) => (
-              <li key={link.to}>
-                <Link
-                  to={link.to}
-                  className="block text-base text-foreground/80 hover:text-foreground"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <button
-            type="button"
-            onClick={() => setLanguage(language === 'pt' ? 'en' : 'pt')}
-            className="mt-6 rounded-md border border-border px-3 py-1.5 font-mono text-xs text-foreground/70 hover:border-foreground hover:bg-accent/10 hover:text-foreground"
-            aria-label="Change language"
-          >
-            {languages[language]}
-          </button>
         </div>
-      )}
+
+        {/* Mobile Drawer */}
+        {mobileMenuOpen && (
+          <div className="border-t border-white/10 bg-background/95 px-6 py-4 lg:hidden">
+            <div className="flex flex-col space-y-2">
+              {navLinks.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  onClick={scrollToSection(item.id)}
+                  className="rounded-lg px-3 py-2 text-sm font-medium text-foreground/80 hover:bg-secondary/60 hover:text-foreground"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+      </header>
     </>
   );
 };

@@ -13,10 +13,26 @@ import { Language } from "./content/siteContent";
 const queryClient = new QueryClient();
 
 const App = () => {
-  const [language, setLanguage] = useState<Language>('en');
+  const [language, setLanguageState] = useState<Language>(() => {
+    try {
+      const saved = localStorage.getItem("bdl-lang");
+      return saved === "pt" ? "pt" : "en";
+    } catch {
+      return "en";
+    }
+  });
+
+  const setLanguage = (lang: Language) => {
+    setLanguageState(lang);
+    try {
+      localStorage.setItem("bdl-lang", lang);
+    } catch {
+      // Ignore storage errors
+    }
+  };
 
   useEffect(() => {
-    document.documentElement.lang = language === 'pt' ? 'pt-BR' : 'en';
+    document.documentElement.lang = language === "pt" ? "pt-BR" : "en";
   }, [language]);
 
   return (
